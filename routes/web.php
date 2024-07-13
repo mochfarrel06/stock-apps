@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Gudang\Auth\LoginController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Gudang\Dashboard\GudangDashboardController;
+use App\Http\Controllers\Gudang\Item\ItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +20,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('login', [LoginController::class, 'index'])->name('login');
-Route::post('login', [LoginController::class, 'store'])->name('login.store');
-Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
+Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::post('login', [AuthController::class, 'store'])->name('login.store');
+Route::post('logout', [AuthController::class, 'destroy'])->name('logout');
 
 Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 'role:Gudang']], function () {
     Route::get('dashboard', [GudangDashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('item', ItemController::class);
 });
