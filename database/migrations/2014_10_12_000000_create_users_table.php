@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('avatar')->default('/uploads/avatar.png')->nullable();
             $table->string('name');
+            $table->string('username');
             $table->string('email')->unique();
             $table->enum('role', ['Administrator', 'Gudang', 'Manajer']);
             $table->timestamp('email_verified_at')->nullable();
