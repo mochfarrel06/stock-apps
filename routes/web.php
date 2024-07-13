@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Gudang\Auth\LoginController;
+use App\Http\Controllers\Gudang\Dashboard\GudangDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
+});
+
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('login', [LoginController::class, 'store'])->name('login.store');
+Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
+
+Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 'role:Gudang']], function () {
+    Route::get('dashboard', [GudangDashboardController::class, 'index'])->name('dashboard');
 });
