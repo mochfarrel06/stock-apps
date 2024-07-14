@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@yield('title-page')</title>
@@ -21,6 +22,8 @@
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/izitoast/css/iziToast.min.css') }}">
 
 </head>
 
@@ -108,6 +111,43 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets/js/demo/datatables-demo.js') }}"></script>
 
+    <script src="{{ asset('assets/vendor/izitoast/js/iziToast.min.js') }}"></script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+        });
+
+        $(document).ready(function() {
+            @if (session('success'))
+                iziToast.success({
+                    title: 'Berhasil',
+                    message: '{{ session('success') }}',
+                    position: 'topRight'
+                });
+            @endif
+
+            @if (session('error'))
+                iziToast.error({
+                    title: 'Error',
+                    message: '{{ session('error') }}',
+                    position: 'topRight'
+                });
+            @endif
+
+            @if (session('info'))
+                iziToast.info({
+                    title: 'Info',
+                    message: '{{ session('info') }}',
+                    position: 'topRight'
+                });
+            @endif
+        });
+    </script>
+
+    @stack('scripts')
 </body>
 
 </html>
