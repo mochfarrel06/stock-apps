@@ -111,6 +111,9 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets/js/demo/datatables-demo.js') }}"></script>
 
+    <!-- SweetAlert Library for Beautiful Alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="{{ asset('assets/vendor/izitoast/js/iziToast.min.js') }}"></script>
 
     <script>
@@ -118,6 +121,63 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+        });
+
+        $(document).ready(function() {
+            $('body').on('click', '.delete-item', function(e) {
+                e.preventDefault(); // Prevent default action
+                let url = $(this).attr('href'); // Get URL from href attribute
+                let row = $(this).closest('tr'); // Get the row to be deleted
+
+                Swal.fire({
+                    title: "Apakah anda ingin menghapus data?",
+                    text: "",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Delete"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // AJAX request to delete item
+                        $.ajax({
+                            method: 'DELETE',
+                            url: url,
+                            data: {
+                                "_token": "{{ csrf_token() }}", // Add CSRF token
+                            },
+                            success: function(response) {
+                                if (response.status === 'success') {
+                                    iziToast.success({
+                                        title: 'Success',
+                                        message: response.message,
+                                        position: 'topRight'
+                                    });
+                                    row.remove(); // Remove the item from the table
+
+                                    // Update row indices
+                                    $('#dataTable tbody tr').each(function(index) {
+                                        $(this).find('.index').text(index + 1);
+                                    });
+                                } else if (response.status === 'error') {
+                                    iziToast.error({
+                                        title: 'Error',
+                                        message: response.message,
+                                        position: 'topRight'
+                                    });
+                                }
+                            },
+                            error: function(error) {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: 'Terjadi kesalahan saat menghapus data. Silakan coba lagi nanti.',
+                                    position: 'topRight'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
         });
 
         $(document).ready(function() {

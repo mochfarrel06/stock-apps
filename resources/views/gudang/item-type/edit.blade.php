@@ -68,13 +68,13 @@
                         sessionStorage.setItem('success',
                             'daftar petani berhasil disubmit.');
                         window.location.href =
-                            "{{ route('production.farmer.index') }}"; // Redirect to index page
+                            "{{ route('gudang.item-type.index') }}"; // Redirect to index page
                     } else if (response.info) {
                         // Flash message info
                         sessionStorage.setItem('info',
                             'Tidak melakukan perubahan data pada daftar petani.');
                         window.location.href =
-                            "{{ route('production.farmer.index') }}"; // Redirect to index page
+                            "{{ route('gudang.item-type.index') }}"; // Redirect to index page
                     } else {
                         // Flash message error
                         $('#flash-messages').html('<div class="alert alert-danger">' +

@@ -29,6 +29,14 @@ class UserSeeder extends Seeder
                 'role' => 'Gudang',
                 'password' => static::$password ??= Hash::make('password'),
             ],
+
+            [
+                'name' => 'Dysna Lola',
+                'username' => 'dysna06',
+                'email' => 'gudang2@gmail.com',
+                'role' => 'Gudang',
+                'password' => static::$password ??= Hash::make('password'),
+            ],
         ]);
     }
 }

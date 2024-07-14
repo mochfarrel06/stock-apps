@@ -4,7 +4,7 @@ namespace App\Http\Requests\Gudang\ItemType;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ItemTypeCreateRequest extends FormRequest
+class ItemTypeUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,14 @@ class ItemTypeCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'unique:item_types,name', 'max:255']
+            'name' => ['required', 'string', 'max:255']
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Jenis barang tidak boleh kosong',
-            'name.unique' => 'Nama jenis barang sudah di tambahkan'
+            'name.required' => 'Jenis barang tidak boleh kosong'
         ];
     }
 }
