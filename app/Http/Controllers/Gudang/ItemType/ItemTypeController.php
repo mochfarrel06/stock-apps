@@ -70,7 +70,8 @@ class ItemTypeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $itemType = ItemType::findOrFail($id);
+        return view();
     }
 
     /**
