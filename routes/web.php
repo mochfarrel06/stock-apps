@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Gudang\Dashboard\GudangDashboardController;
 use App\Http\Controllers\Gudang\Item\ItemController;
 use App\Http\Controllers\Gudang\ItemType\ItemTypeController;
+use App\Http\Controllers\Gudang\UnitType\UnitTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,7 @@ Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 
 
     // Route Jenis Barang
     Route::resource('item-type', ItemTypeController::class);
+
+    // Route Satuan Barang
+    Route::resource('unit-type', UnitTypeController::class);
 });

@@ -57,4 +57,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(ItemType::class);
     }
+
+    /**
+     * Mendefinisikan relasi "hasMany" antara model saat ini dan model UnitType.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini dapat memiliki banyak
+     * instance dari model UnitType. Dengan kata lain, model ini adalah parent dari
+     * banyak instance model UnitType.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function unitType()
+    {
+        return $this->hasMany(UnitType::class);
+    }
 }
