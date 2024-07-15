@@ -10,6 +10,14 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Lihat Jenis Barang</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.item-type.index') }}">Jenis Barang</a></li>
+                    <li class="breadcrumb-item">Lihat</li>
+                </ol>
+            </nav>
         </div>
 
         <div class="row">

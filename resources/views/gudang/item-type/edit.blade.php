@@ -10,6 +10,14 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Edit Jenis Barang</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.item-type.index') }}">Jenis Barang</a></li>
+                    <li class="breadcrumb-item">Edit</li>
+                </ol>
+            </nav>
         </div>
 
         <div class="row">
@@ -33,7 +41,7 @@
                                 @enderror
                             </div>
 
-                            <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Edit</button>
+                            <button type="submit" id="submit-btn" class="btn btn-success mt-3">Edit</button>
                             <a href="{{ route('gudang.item-type.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
                         </form>
                     </div>
@@ -66,13 +74,13 @@
                     if (response.success) {
                         // Flash message sukses
                         sessionStorage.setItem('success',
-                            'daftar petani berhasil disubmit.');
+                            'Jenis barang berhasil disubmit.');
                         window.location.href =
                             "{{ route('gudang.item-type.index') }}"; // Redirect to index page
                     } else if (response.info) {
                         // Flash message info
                         sessionStorage.setItem('info',
-                            'Tidak melakukan perubahan data pada daftar petani.');
+                            'Tidak melakukan perubahan data pada jenis barang.');
                         window.location.href =
                             "{{ route('gudang.item-type.index') }}"; // Redirect to index page
                     } else {
@@ -93,12 +101,12 @@
                     }
 
                     const message = response.responseJSON.message ||
-                        'Terdapat kesalahan pada daftar petani.';
+                        'Terdapat kesalahan pada jenis barang.';
                     $('#flash-messages').html('<div class="alert alert-danger">' + message +
                         '</div>');
                 },
                 complete: function() {
-                    submitButton.prop('disabled', false).text('Simpan');
+                    submitButton.prop('disabled', false).text('Edit');
                 }
             });
         });

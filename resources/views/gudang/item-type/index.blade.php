@@ -10,6 +10,13 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Halaman Jenis Barang</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
+                    <li class="breadcrumb-item">Jenis Barang</li>
+                </ol>
+            </nav>
         </div>
 
         <div class="card shadow mb-4">
@@ -32,7 +39,7 @@
                             @foreach ($itemTypes as $itemType)
                                 <tr>
                                     <td class="index">{{ $loop->index + 1 }}</td>
-                                    <td>{{ $itemType->name }}</td>
+                                    <td>{{ $itemType->name ?? '' }}</td>
                                     <td>
                                         <a href="{{ route('gudang.item-type.show', $itemType->id) }}"
                                             class="btn btn-warning mr-2"><i class="fas fa-eye"></i></a>
