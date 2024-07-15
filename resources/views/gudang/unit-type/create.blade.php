@@ -14,7 +14,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.item-type.index') }}">Satuan Barang</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.unit-type.index') }}">Satuan Barang</a></li>
                     <li class="breadcrumb-item">Tambah</li>
                 </ol>
             </nav>

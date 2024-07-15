@@ -37,6 +37,9 @@ class UnitType extends Model
 
     /**
      * Boot the model
+     *
+     * Membuat data agar tidak duplikat
+     *
      */
     public static function boot()
     {
@@ -55,5 +58,19 @@ class UnitType extends Model
                 throw new \Exception('Nama satuan barang sudah di tambahkan');
             }
         });
+    }
+
+    /**
+     * Mendefinisikan relasi "hasMany" antara model saat ini dan model Item.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini dapat memiliki banyak
+     * instance dari model Item. Dengan kata lain, model ini adalah parent dari
+     * banyak instance model Item.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function Item()
+    {
+        return $this->hasMany(Item::class);
     }
 }

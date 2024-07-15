@@ -19,10 +19,10 @@ return new class extends Migration
             $table->unsignedBigInteger('unit_type_id');
 
             $table->string('name');
-            $table->string('item_code');
+            $table->string('item_code')->unique();
             $table->bigInteger('stock')->default(0);
             $table->bigInteger('reorder_level');
-            $table->decimal('price', 8, 2);
+            $table->integer('price');
             $table->string('photo');
 
             $table->timestamps();

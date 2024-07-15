@@ -29,12 +29,12 @@ Route::post('logout', [AuthController::class, 'destroy'])->name('logout');
 Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 'role:Gudang']], function () {
     Route::get('dashboard', [GudangDashboardController::class, 'index'])->name('dashboard');
 
-    // Route Gudang
-    Route::resource('item', ItemController::class);
-
     // Route Jenis Barang
     Route::resource('item-type', ItemTypeController::class);
 
     // Route Satuan Barang
     Route::resource('unit-type', UnitTypeController::class);
+
+    // Route Gudang
+    Route::resource('item', ItemController::class);
 });
