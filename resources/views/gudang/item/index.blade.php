@@ -42,7 +42,7 @@
                         <tbody>
                             @foreach ($items as $item)
                                 <tr>
-                                    <td>{{ $loop->index + 1 }}</td>
+                                    <td class="index">{{ $loop->index + 1 }}</td>
                                     <td>{{ $item->name ?? '' }}</td>
                                     <td>{{ $item->stock ?? '' }}</td>
                                     <td>{{ $item->reorder_level ?? '' }}</td>
@@ -53,8 +53,8 @@
                                                 class="fas fa-eye"></i></a>
                                         <a href="{{ route('gudang.item.edit', $item->id) }}"
                                             class="btn btn-success mr-2"><i class="fas fa-edit"></i></a>
-                                        {{-- <a href="{{ route('gudang.item-type.destroy', $itemType->id) }}"
-                                            class="btn btn-danger mr-2 delete-item"><i class="fas fa-trash"></i></a> --}}
+                                        <a href="{{ route('gudang.item.destroy', $item->id) }}"
+                                            class="btn btn-danger mr-2 delete-item"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

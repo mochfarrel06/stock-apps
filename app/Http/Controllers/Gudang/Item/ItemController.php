@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Gudang\Item;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Gudang\Item\ItemCreateRequest;
+use App\Http\Requests\Gudang\Item\ItemUpdateRequest;
 use App\Models\Item;
 use App\Models\ItemType;
 use App\Models\UnitType;
 use App\Traits\FileUploadTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
@@ -96,9 +96,45 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ItemUpdateRequest $request, string $id)
     {
-        //
+        try {
+            $item = Item::findOrFail($id);
+            $itemTypeId = $request->input('item_type_id');
+            $unitTypeId = $request->input('unit_type_id');
+
+            $itemType = ItemType::findOrFail($itemTypeId);
+            $unitType = UnitType::findOrFail($unitTypeId);
+
+            $items = $request->except('photo');
+
+            if ($request->hasFile('photo')) {
+                if ($item->photo && file_exists(public_path($item->photo))) {
+                    unlink(public_path($item->photo));
+                }
+
+                $imagePath = $this->uploadImage($request, 'photo');
+                $items['photo'] = $imagePath;
+            }
+
+            $items['item_type_id'] = $itemType->id;
+            $items['unit_type_id'] = $unitType->id;
+
+            $item->fill($items);
+
+            if ($item->isDirty()) {
+                $item->save();
+
+                session()->flash('success', 'Berhasil melakukan perubahan data pada data barang');
+                return response()->json(['success' => true], 200);
+            } else {
+                session()->flash('info', 'Tidak melakukan perubahan data pada data barang');
+                return response()->json(['info' => true], 200);
+            }
+        } catch (\Exception $e) {
+            session()->flash('error', 'Terdapat kesalahan pada data barang: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
     }
 
     /**
@@ -106,6 +142,23 @@ class ItemController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $item = Item::findOrFail($id);
+
+            if ($item->photo) {
+                $photoPath = public_path($item->photo);
+                if (file_exists($photoPath)) {
+                    unlink($photoPath);
+                }
+            }
+
+            $item->delete();
+
+            // Memberikan respons bahwa penghapusan berhasil
+            return response(['status' => 'success', 'message' => 'Berhasil menghapus data barang']);
+        } catch (\Exception $e) {
+            // Menangani exception jika terjadi kesalahan saat menghapus
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }

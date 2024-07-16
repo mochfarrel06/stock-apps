@@ -161,8 +161,6 @@
 
                         const message = response.responseJSON.message ||
                             'Terdapat kesalahan pada proses data barang';
-                        window.location.href =
-                            "{{ route('gudang.item.index') }}";
                         $('#flash-messages').html('<div class="alert alert-danger">' + message +
                             '</div>');
                     },

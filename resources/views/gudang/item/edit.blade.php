@@ -116,7 +116,8 @@
 
                             <div class="form-group">
                                 <label for="photo" class="form-label">Gambar Produk</label>
-                                <input class="form-control" type="file" id="photo" name="photo">
+                                <input class="form-control" type="file" id="photo" name="photo"
+                                    value="{{ old('photo', $item->photo) }}">
                                 @error('photo')
                                     <div class="text-danger">*{{ message }}</div>
                                 @enderror
@@ -155,13 +156,13 @@
                         sessionStorage.setItem('success',
                             'Jenis barang berhasil disubmit.');
                         window.location.href =
-                            "{{ route('gudang.item-type.index') }}"; // Redirect to index page
+                            "{{ route('gudang.item.index') }}"; // Redirect to index page
                     } else if (response.info) {
                         // Flash message info
                         sessionStorage.setItem('info',
                             'Tidak melakukan perubahan data pada jenis barang.');
                         window.location.href =
-                            "{{ route('gudang.item-type.index') }}"; // Redirect to index page
+                            "{{ route('gudang.item.index') }}"; // Redirect to index page
                     } else {
                         // Flash message error
                         $('#flash-messages').html('<div class="alert alert-danger">' +
