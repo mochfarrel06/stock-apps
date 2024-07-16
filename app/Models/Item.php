@@ -27,4 +27,74 @@ class Item extends Model
         'price',
         'photo'
     ];
+
+    /**
+     * Mendefinisikan relasi "belongsTo" antara model saat ini dan model User.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini adalah "milik"
+     * dari satu instance dari model User. Dengan kata lain, model ini memiliki
+     * foreign key yang mengacu pada primary key di model User.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Mendefinisikan relasi "belongsTo" antara model saat ini dan model ItemType.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini adalah "milik"
+     * dari satu instance dari model ItemType. Dengan kata lain, model ini memiliki
+     * foreign key yang mengacu pada primary key di model ItemType.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function itemType()
+    {
+        return $this->belongsTo(ItemType::class);
+    }
+
+    /**
+     * Mendefinisikan relasi "belongsTo" antara model saat ini dan model UnitType.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini adalah "milik"
+     * dari satu instance dari model UnitType. Dengan kata lain, model ini memiliki
+     * foreign key yang mengacu pada primary key di model UnitType.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function unitType()
+    {
+        return $this->belongsTo(UnitType::class);
+    }
+
+    /**
+     * Mendefinisikan relasi "hasMany" antara model saat ini dan model IncomingItem.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini dapat memiliki banyak
+     * instance dari model IncomingItem. Dengan kata lain, model ini adalah parent dari
+     * banyak instance model IncomingItem.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function incomingItem()
+    {
+        return $this->hasMany(IncomingItem::class);
+    }
+
+    /**
+     * Mendefinisikan relasi "hasMany" antara model saat ini dan model OutgoingItem.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini dapat memiliki banyak
+     * instance dari model OutgoingItem. Dengan kata lain, model ini adalah parent dari
+     * banyak instance model OutgoingItem.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function outgoingItem()
+    {
+        return $this->hasMany(OutgoingItem::class);
+    }
 }

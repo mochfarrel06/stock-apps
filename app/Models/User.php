@@ -43,4 +43,74 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Mendefinisikan relasi "hasMany" antara model saat ini dan model ItemType.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini dapat memiliki banyak
+     * instance dari model ItemType. Dengan kata lain, model ini adalah parent dari
+     * banyak instance model ItemType.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function itemType()
+    {
+        return $this->hasMany(ItemType::class);
+    }
+
+    /**
+     * Mendefinisikan relasi "hasMany" antara model saat ini dan model UnitType.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini dapat memiliki banyak
+     * instance dari model UnitType. Dengan kata lain, model ini adalah parent dari
+     * banyak instance model UnitType.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function unitType()
+    {
+        return $this->hasMany(UnitType::class);
+    }
+
+    /**
+     * Mendefinisikan relasi "hasMany" antara model saat ini dan model Item.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini dapat memiliki banyak
+     * instance dari model Item. Dengan kata lain, model ini adalah parent dari
+     * banyak instance model Item.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function item()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    /**
+     * Mendefinisikan relasi "hasMany" antara model saat ini dan model IncomingItem.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini dapat memiliki banyak
+     * instance dari model IncomingItem. Dengan kata lain, model ini adalah parent dari
+     * banyak instance model IncomingItem.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function incomingItem()
+    {
+        return $this->hasMany(IncomingItem::class);
+    }
+
+    /**
+     * Mendefinisikan relasi "hasMany" antara model saat ini dan model OutgoingItem.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini dapat memiliki banyak
+     * instance dari model OutgoingItem. Dengan kata lain, model ini adalah parent dari
+     * banyak instance model OutgoingItem.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function outgoingItem()
+    {
+        return $this->hasMany(OutgoingItem::class);
+    }
 }
