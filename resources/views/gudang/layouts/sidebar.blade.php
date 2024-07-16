@@ -80,6 +80,33 @@
     </li>
 
     <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Laporan
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item {{ request()->routeIs('gudang.item-report.index') ? 'active' : '' }}">
+        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-solid fa-file"></i>
+            <span>Laporan</span>
+        </a>
+        <div id="collapsePages" class="collapse {{ request()->routeIs('gudang.item-report.index') ? 'show' : '' }}"
+            aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Laporan</h6>
+                <a class="collapse-item {{ request()->routeIs('gudang.item-report.index') ? 'active' : '' }}"
+                    href="{{ route('gudang.item-report.index') }}">Laporan Data Barang</a>
+                {{-- <a class="collapse-item {{ request()->routeIs('gudang.outgoing-item*') ? 'active' : '' }}"
+                    href="{{ route('gudang.outgoing-item.index') }}">Barang Keluar</a> --}}
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
