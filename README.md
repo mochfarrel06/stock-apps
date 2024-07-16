@@ -33,7 +33,6 @@ Stock-Apps is a website-based application designed to help users manage and moni
 2. Install dependencies:
     ```bash
     composer install
-    npm install
     ```
 
 3. Copy `.env.example` to `.env` and configure your environment variables:
@@ -58,6 +57,43 @@ Stock-Apps is a website-based application designed to help users manage and moni
     ```bash
     php artisan serve
     ```
+
+## Usage
+
+1. Buka browser dan akses [http://localhost:8000](http://localhost:8000).
+2. Login pada halaman.
+3. Mulai kelola stok barang dengan fitur yang tersedia.
+
+## Features
+
+- Pencatatan stok barang masuk dan keluar
+- Pemantauan stok barang secara real-time
+- Laporan stok barang
+- Notifikasi stok barang rendah
+
+## Configuration
+
+Konfigurasi aplikasi dapat dilakukan melalui file `.env`. Pastikan untuk mengatur kredensial database dan pengaturan lainnya sesuai kebutuhan.
+
+## Running Tests
+
+Untuk menjalankan tes, gunakan perintah berikut:
+
+```bash
+php artisan test
+```
+
+## Contributing
+
+- Fork repository ini.
+- Buat branch baru untuk fitur atau perbaikan Anda (git checkout -b feature/AmazingFeature).
+- Commit perubahan Anda (git commit -m 'Add some AmazingFeature').
+- Push ke branch (git push origin feature/AmazingFeature).
+- Buka pull request.
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
