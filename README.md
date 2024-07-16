@@ -60,24 +60,24 @@ Stock-Apps is a website-based application designed to help users manage and moni
 
 ## Usage
 
-1. Buka browser dan akses [http://localhost:8000](http://localhost:8000).
-2. Login pada halaman.
-3. Mulai kelola stok barang dengan fitur yang tersedia.
+1. Open the browser and access [http://localhost:8000](http://localhost:8000).
+2. Login on the page.
+3. Start managing stock with the available features.
 
 ## Features
 
-- Pencatatan stok barang masuk dan keluar
-- Pemantauan stok barang secara real-time
-- Laporan stok barang
-- Notifikasi stok barang rendah
-
+- Recording of incoming and outgoing stock
+- Real-time stock monitoring
+- Stock report
+- Low stock notification
+  
 ## Configuration
 
-Konfigurasi aplikasi dapat dilakukan melalui file `.env`. Pastikan untuk mengatur kredensial database dan pengaturan lainnya sesuai kebutuhan.
+Application configuration can be done via files `.env`. Make sure to set database credentials and other settings as needed.
 
 ## Running Tests
 
-Untuk menjalankan tes, gunakan perintah berikut:
+To run the test, use the following command:
 
 ```bash
 php artisan test
@@ -85,11 +85,11 @@ php artisan test
 
 ## Contributing
 
-- Fork repository ini.
-- Buat branch baru untuk fitur atau perbaikan Anda (git checkout -b feature/AmazingFeature).
-- Commit perubahan Anda (git commit -m 'Add some AmazingFeature').
-- Push ke branch (git push origin feature/AmazingFeature).
-- Buka pull request.
+- Fork this repository.
+- Create a new branch for your feature or fix (git checkout -b feature/AmazingFeature).
+- Commit your changes (git commit -m 'Add some AmazingFeature').
+- Push to branch (git push origin feature/AmazingFeature).
+- Open a pull request.
 
 ## License
 
