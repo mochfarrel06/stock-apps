@@ -1,5 +1,27 @@
 # Stock-Apps
 
+Stock-Apps is a website-based application designed to help users manage and monitor stock of goods. This application allows users to record, update and view stock information in real-time, thus facilitating the inventory management process and ensuring that the availability of goods is always well monitored.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Configuration](#configuration)
+- [Running Tests](#running-tests)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+### Prerequisites
+
+- PHP >= 8.0
+- Composer
+- Laravel
+- MySQL
+- Laragon
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
