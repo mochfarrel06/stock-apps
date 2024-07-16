@@ -5,6 +5,7 @@ use App\Http\Controllers\Gudang\Dashboard\GudangDashboardController;
 use App\Http\Controllers\Gudang\IncomingItem\IncomingItemController;
 use App\Http\Controllers\Gudang\Item\ItemController;
 use App\Http\Controllers\Gudang\ItemType\ItemTypeController;
+use App\Http\Controllers\Gudang\OutgoingItem\OutgoingItemController;
 use App\Http\Controllers\Gudang\UnitType\UnitTypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +42,7 @@ Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 
 
     // Route Barang Masuk
     Route::resource('incoming-item', IncomingItemController::class);
+
+    // Route Barang Keluar
+    Route::resource('outgoing-item', OutgoingItemController::class);
 });

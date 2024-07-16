@@ -61,18 +61,22 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item {{ request()->routeIs('gudang.incoming-item*') ? 'active' : '' }}">
+    <li
+        class="nav-item {{ request()->routeIs('gudang.incoming-item*') || request()->routeIs('gudang.outgoing-item*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
             <span>Transaksi</span>
         </a>
-        <div id="collapsePages" class="collapse {{ request()->routeIs('gudang.incoming-item*') ? 'show' : '' }}"
+        <div id="collapsePages"
+            class="collapse {{ request()->routeIs('gudang.incoming-item*') || request()->routeIs('gudang.outgoing-item*') ? 'show' : '' }}"
             aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Transaksi</h6>
                 <a class="collapse-item {{ request()->routeIs('gudang.incoming-item.*') ? 'active' : '' }}"
                     href="{{ route('gudang.incoming-item.index') }}">Barang Masuk</a>
+                <a class="collapse-item {{ request()->routeIs('gudang.outgoing-item*') ? 'active' : '' }}"
+                    href="{{ route('gudang.outgoing-item.index') }}">Barang Keluar</a>
             </div>
         </div>
     </li>

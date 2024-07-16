@@ -83,4 +83,18 @@ class Item extends Model
     {
         return $this->hasMany(IncomingItem::class);
     }
+
+    /**
+     * Mendefinisikan relasi "hasMany" antara model saat ini dan model OutgoingItem.
+     *
+     * Relasi ini menunjukkan bahwa satu instance dari model ini dapat memiliki banyak
+     * instance dari model OutgoingItem. Dengan kata lain, model ini adalah parent dari
+     * banyak instance model OutgoingItem.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function outgoingItem()
+    {
+        return $this->hasMany(OutgoingItem::class);
+    }
 }
