@@ -70,7 +70,7 @@ class ItemType extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
 
-    public function Item()
+    public function item()
     {
         return $this->hasMany(Item::class);
     }

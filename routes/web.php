@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Gudang\Dashboard\GudangDashboardController;
+use App\Http\Controllers\Gudang\IncomingItem\IncomingItemController;
 use App\Http\Controllers\Gudang\Item\ItemController;
 use App\Http\Controllers\Gudang\ItemType\ItemTypeController;
 use App\Http\Controllers\Gudang\UnitType\UnitTypeController;
@@ -37,4 +38,7 @@ Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 
 
     // Route Gudang
     Route::resource('item', ItemController::class);
+
+    // Route Barang Masuk
+    Route::resource('incoming-item', IncomingItemController::class);
 });
