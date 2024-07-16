@@ -22,6 +22,43 @@ Stock-Apps is a website-based application designed to help users manage and moni
 - MySQL
 - Laragon
 
+### Steps
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/username/stock-apps.git
+    cd stock-apps
+    ```
+
+2. Install dependencies:
+    ```bash
+    composer install
+    npm install
+    ```
+
+3. Copy `.env.example` to `.env` and configure your environment variables:
+    ```bash
+    cp .env.example .env
+    ```
+
+4. Generate application key:
+    ```bash
+    php artisan key:generate
+    ```
+
+5. Set up the database:
+    - Create a database in MySQL.
+    - Update the `.env` file with your database credentials.
+    - Run migrations and seeders:
+    ```bash
+    php artisan migrate --seed
+    ```
+
+6. Serve the application:
+    ```bash
+    php artisan serve
+    ```
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
