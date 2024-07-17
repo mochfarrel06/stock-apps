@@ -41,6 +41,8 @@ Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 
     // Route Gudang
     Route::resource('item', ItemController::class);
     Route::get('item-report', [ItemReportController::class, 'index'])->name('item-report.index');
+    Route::get('item-report/export', [ItemReportController::class, 'exportPdf'])->name('item-report.exportPdf');
+    Route::get('item-report/export-excel', [ItemReportController::class, 'exportExcel'])->name('item-report.exportExcel');
 
     // Route Barang Masuk
     Route::resource('incoming-item', IncomingItemController::class);

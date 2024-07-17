@@ -19,6 +19,40 @@
             </nav>
         </div>
 
+        <div class="row mb-5">
+            <div class="col-lg-12">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Filter Data Stok Barang</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('gudang.item-report.index') }}" method="GET">
+                            @csrf
+
+                            <div class="col-md-6 p-0">
+                                <div class="form-group">
+                                    <label for="filter">Filter Stok Barang</label>
+                                    <select name="filter" id="filter" class="form-control">
+                                        <option value="">-- Pilih Stok Barang --</option>
+                                        <option value="all" {{ request('filter') == 'all' ? 'selected' : '' }}>Semua Data
+                                            Stok</option>
+                                        <option value="minimum" {{ request('filter') == 'minimum' ? 'selected' : '' }}>Stok
+                                            Minimum</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Tampilkan Data</button>
+                            <a href="{{ route('gudang.item-report.exportPdf', ['filter' => request('filter')]) }}"
+                                class="btn btn-warning">Export Data</a>
+                            <a href="{{ route('gudang.item-report.exportExcel', ['filter' => request('filter')]) }}"
+                                class="btn btn-success">Export Excel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between ">
                 <h6 class="m-0 font-weight-bold text-primary">Table Laporan Data Barang</h6>
