@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Gudang\IncomingItem;
+namespace App\Http\Controllers\Gudang\OutgoingItem;
 
-use App\Exports\IncomingExport;
+use App\Exports\OutgoingExport;
 use App\Http\Controllers\Controller;
-use App\Models\IncomingItem;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\OutgoingItem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 
-class IncomingItemReportController extends Controller
+class OutgoingItemReportController extends Controller
 {
     public function getFilteredData($startDate, $endDate)
     {
         if ($startDate && $endDate) {
             $endDate = Carbon::parse($endDate)->addDay()->format('Y-m-d');
-            return IncomingItem::whereBetween('created_at', [$startDate, $endDate])->get();
+            return OutgoingItem::whereBetween('created_at', [$startDate, $endDate])->get();
         }
 
         return collect();
@@ -27,9 +27,9 @@ class IncomingItemReportController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $incomingItems = $this->getFilteredData($startDate, $endDate);
+        $outgoingItems = $this->getFilteredData($startDate, $endDate);
 
-        return view('gudang.incoming-report.index', compact('incomingItems', 'startDate', 'endDate'));
+        return view('gudang.outgoing-report.index', compact('outgoingItems', 'startDate', 'endDate'));
     }
 
     public function exportPdf(Request $request)
@@ -37,9 +37,9 @@ class IncomingItemReportController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $incomingItems = $this->getFilteredData($startDate, $endDate);
+        $outgoingItems = $this->getFilteredData($startDate, $endDate);
 
-        $pdf = Pdf::loadView('gudang.incoming-report.exportPdf', compact('startDate', 'endDate', 'incomingItems'));
+        $pdf = Pdf::loadView('gudang.outgoing-report.exportPdf', compact('startDate', 'endDate', 'outgoingItems'));
         return $pdf->download('laporan_data_barang.pdf');
     }
 
@@ -48,8 +48,8 @@ class IncomingItemReportController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $incomingItems = $this->getFilteredData($startDate, $endDate);
+        $outgoingItems = $this->getFilteredData($startDate, $endDate);
 
-        return Excel::download(new IncomingExport($incomingItems), 'laporan.xlsx');
+        return Excel::download(new OutgoingExport($outgoingItems), 'laporan.xlsx');
     }
 }

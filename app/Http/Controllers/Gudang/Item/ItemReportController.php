@@ -11,35 +11,32 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ItemReportController extends Controller
 {
+
+    public function getFilteredData($filter)
+    {
+        if ($filter === 'minimum') {
+            return Item::whereColumn('stock', '<=', 'reorder_level')->get();
+        } else if ($filter === 'all') {
+            return Item::all();
+        }
+
+        return collect();
+    }
+
     public function index(Request $request)
     {
         $filter = $request->input('filter');
 
-        $items = collect();
-
-        if ($filter === 'minimum') {
-            $items = Item::whereColumn('stock', '<=', 'reorder_level')->get();
-        } elseif ($filter === 'all') {
-            $items = Item::all();
-        }
+        $items = $this->getFilteredData($filter);
 
         return view('gudang.item-report.index', compact('items', 'filter'));
     }
 
     public function exportPdf(Request $request)
     {
-        $filter = $request->input('filter');
-
-        $items = collect();
-        $titlePdf = '';
-
-        if ($filter === 'minimum') {
-            $items = Item::whereColumn('stock', '<=', 'reorder_level')->get();
-            $titlePdf = 'Laporan Stok Barang Minimum';
-        } elseif ($filter === 'all') {
-            $items = Item::all();
-            $titlePdf = 'Laporan Stok Barang';
-        }
+        $filter = $request->input('filter', '');
+        $items = $this->getFilteredData($filter);
+        $titlePdf = $filter === 'minimum' ? 'Laporan Stok Barang Minimum' : 'Laporan Semua Stok Barang';
 
         $pdf = Pdf::loadView('gudang.item-report.exportPdf', compact('items', 'filter', 'titlePdf'));
 
