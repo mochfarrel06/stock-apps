@@ -9,6 +9,7 @@ use App\Http\Controllers\Gudang\Item\ItemReportController;
 use App\Http\Controllers\Gudang\ItemType\ItemTypeController;
 use App\Http\Controllers\Gudang\OutgoingItem\OutgoingItemController;
 use App\Http\Controllers\Gudang\OutgoingItem\OutgoingItemReportController;
+use App\Http\Controllers\Gudang\Profile\ProfileController;
 use App\Http\Controllers\Gudang\UnitType\UnitTypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,11 @@ Route::post('logout', [AuthController::class, 'destroy'])->name('logout');
 
 Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 'role:Gudang']], function () {
     Route::get('dashboard', [GudangDashboardController::class, 'index'])->name('dashboard');
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('profile/edit-profile', [ProfileController::class, 'editProfile'])->name('profile.editProfile');
+    Route::put('profile/update-profile', [ProfileController::class, 'updateProfile'])->name('profile.updateProfile');
+    Route::get('profile/edit-password', [ProfileController::class, 'editPassword'])->name('profile.editPassword');
+    Route::put('profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 
     // Route Jenis Barang
     Route::resource('item-type', ItemTypeController::class);
