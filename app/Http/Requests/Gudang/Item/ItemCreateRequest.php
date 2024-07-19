@@ -40,7 +40,7 @@ class ItemCreateRequest extends FormRequest
             'unit_type_id.required' => 'Satuan Barang tidak boleh kosong',
             'name.required' => 'Nama Barang tidak boleh kosong',
             'item_code.required' => 'Kode Barang tidak boleh kosong',
-            'item.code.unique' => 'Kode barang sudah di tambahkan',
+            'item_code.unique' => 'Kode barang sudah di tambahkan',
             'reorder_level.required' => 'Stock minimum tidak boleh kosong',
             'price.required' => 'Harga Barang tidak boleh kosong',
             'photo.required' => 'Gambar Barang tidak boleh kosong',

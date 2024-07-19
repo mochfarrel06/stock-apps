@@ -12,7 +12,6 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 mt-2">
                     <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('gudang.item-type.index') }}">Jenis Barang</a></li>
                     <li class="breadcrumb-item">Lihat</li>
                 </ol>

@@ -1,19 +1,18 @@
 @extends('gudang.layouts.master')
 
 @section('title-page')
-    Show
+    Lihat
 @endsection
 
 @section('content')
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Lihat Satuan Barang</h1>
+        <div class="d-lg-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 mt-2 text-gray-900">Lihat Satuan Barang</h1>
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
+                <ol class="breadcrumb mb-0 mt-2">
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('gudang.unit-type.index') }}">Satuan Barang</a></li>
                     <li class="breadcrumb-item">Lihat</li>
                 </ol>
@@ -32,9 +31,8 @@
                             @csrf
 
                             <div class="form-group">
-                                <label for="name">Satuan Barang</label>
-                                <input type="text" class="form-control" value="{{ old('name', $unitType->name) }}"
-                                    disabled>
+                                <label>Satuan Barang</label>
+                                <input type="text" class="form-control" value="{{ $unitType->name }}" disabled>
                             </div>
 
                             <a href="{{ route('gudang.unit-type.index') }}" class="btn btn-warning mt-3">Kembali</a>

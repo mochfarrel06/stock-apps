@@ -12,13 +12,12 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 mt-2">
                     <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
                     <li class="breadcrumb-item">Jenis Barang</li>
                 </ol>
             </nav>
         </div>
         <div class="card shadow mb-4">
-            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between ">
+            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary mb-2">Table Jenis Barang</h6>
                 <a href="{{ route('gudang.item-type.create') }}"
                     class="d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2">Tambah Data</a>

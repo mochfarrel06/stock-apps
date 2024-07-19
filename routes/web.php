@@ -49,7 +49,7 @@ Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 
     // Route Satuan Barang
     Route::resource('unit-type', UnitTypeController::class);
 
-    // Route Gudang
+    // Route Data Barang
     Route::resource('item', ItemController::class);
     Route::get('item-report', [ItemReportController::class, 'index'])->name('item-report.index');
     Route::get('item-report/export', [ItemReportController::class, 'exportPdf'])->name('item-report.exportPdf');

@@ -8,22 +8,21 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Halaman Data Barang</h1>
+        <div class="d-lg-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 mt-2 text-gray-900">Halaman Data Barang</h1>
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
+                <ol class="breadcrumb mb-0 mt-2">
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item">Data Barang</li>
                 </ol>
             </nav>
         </div>
 
         <div class="card shadow mb-4">
-            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between ">
-                <h6 class="m-0 font-weight-bold text-primary">Table Data Barang</h6>
+            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary mb-2">Table Data Barang</h6>
                 <a href="{{ route('gudang.item.create') }}"
-                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Tambah Data</a>
+                    class="dd-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2">Tambah Data</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -31,10 +30,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Kode Barang</th>
                                 <th>Nama Barang</th>
-                                <th>Jumlah Stok</th>
-                                <th>Stok Minimum</th>
-                                <th>Harga</th>
+                                <th>Jenis Barang</th>
                                 <th>Satuan</th>
                                 <th>Aksi</th>
                             </tr>
@@ -43,18 +41,17 @@
                             @foreach ($items as $item)
                                 <tr>
                                     <td class="index">{{ $loop->index + 1 }}</td>
+                                    <td>{{ $item->item_code }}</td>
                                     <td>{{ $item->name ?? '' }}</td>
-                                    <td>{{ $item->stock ?? '' }}</td>
-                                    <td>{{ $item->reorder_level ?? '' }}</td>
-                                    <td>Rp. {{ number_format($item->price ?? 0, 0, ',', '.') }}</td>
+                                    <td>{{ $item->itemType->name ?? '' }}</td>
                                     <td>{{ $item->unitType->name }}</td>
                                     <td>
-                                        <a href="{{ route('gudang.item.show', $item->id) }}" class="btn btn-warning mr-2"><i
-                                                class="fas fa-eye"></i></a>
+                                        <a href="{{ route('gudang.item.show', $item->id) }}"
+                                            class="btn btn-warning mr-2 mb-2"><i class="fas fa-eye"></i></a>
                                         <a href="{{ route('gudang.item.edit', $item->id) }}"
-                                            class="btn btn-success mr-2"><i class="fas fa-edit"></i></a>
+                                            class="btn btn-success mr-2 mb-2"><i class="fas fa-edit"></i></a>
                                         <a href="{{ route('gudang.item.destroy', $item->id) }}"
-                                            class="btn btn-danger mr-2 delete-item"><i class="fas fa-trash"></i></a>
+                                            class="btn btn-danger mr-2 mb-2 delete-item"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
