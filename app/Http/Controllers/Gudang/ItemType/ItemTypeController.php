@@ -41,8 +41,8 @@ class ItemTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * This method handles the storage of a new item type based on the data
-     * provided by the ItemTypeCreateRequest.
+     * Metode ini menangani penyimpanan tipe item baru berdasarkan
+     * data disediakan oleh ItemTypeCreateRequest.
      *
      * @param  \App\Http\Requests\Gudang\ItemType\ItemTypeCreateRequest  $request
      * @return \Illuminate\Http\JsonResponse

@@ -11,6 +11,11 @@ use App\Models\UnitType;
 
 class GudangDashboardController extends Controller
 {
+    /**
+     * Metode untuk menampilkan jumlah data barang, barang masuk, barang keluar,
+     * jenis barang, dan satuan barang. Lalu terdapat tabel untuk menampilkan stok
+     * barang yang akan harus di order
+     */
     public function index()
     {
         $itemCount = Item::all()->count();

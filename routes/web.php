@@ -33,7 +33,10 @@ Route::post('login', [AuthController::class, 'store'])->name('login.store');
 Route::post('logout', [AuthController::class, 'destroy'])->name('logout');
 
 Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 'role:Gudang']], function () {
+    // Route untuk dashboard gudang
     Route::get('dashboard', [GudangDashboardController::class, 'index'])->name('dashboard');
+
+    // Route untuk profile pengguna
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/edit-profile', [ProfileController::class, 'editProfile'])->name('profile.editProfile');
     Route::put('profile/update-profile', [ProfileController::class, 'updateProfile'])->name('profile.updateProfile');
