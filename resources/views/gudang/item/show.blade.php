@@ -1,7 +1,7 @@
 @extends('gudang.layouts.master')
 
 @section('title-page')
-    Show
+    Lihat
 @endsection
 
 @section('content')

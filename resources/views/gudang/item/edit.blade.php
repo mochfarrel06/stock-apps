@@ -8,12 +8,11 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Edit Data Barang</h1>
+        <div class="d-lg-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 mt-2 text-gray-900">Edit Data Barang</h1>
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
+                <ol class="breadcrumb mb-0 mt-2">
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Data Barang</a></li>
                     <li class="breadcrumb-item">Edit</li>
                 </ol>
@@ -24,7 +23,7 @@
             <div class="col-lg-12">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Tambah Data Barang</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Edit Data Barang</h6>
                     </div>
                     <div class="card-body">
                         <form id="main-form" action="{{ route('gudang.item.update', $item->id) }}" method="POST"
@@ -145,7 +144,7 @@
                             </div> --}}
 
                             <button type="submit" id="submit-btn" class="btn btn-success mt-3">Edit</button>
-                            <a href="{{ route('gudang.item.index') }}" class="btn btn-warning mt-3">Kembali</a>
+                            <a href="{{ route('gudang.item.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
                         </form>
                     </div>
                 </div>
