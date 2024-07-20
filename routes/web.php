@@ -11,6 +11,12 @@ use App\Http\Controllers\Gudang\OutgoingItem\OutgoingItemController;
 use App\Http\Controllers\Gudang\OutgoingItem\OutgoingItemReportController;
 use App\Http\Controllers\Gudang\Profile\ProfileController;
 use App\Http\Controllers\Gudang\UnitType\UnitTypeController;
+use App\Http\Controllers\Manajer\Dashboard\ManajerDashboardController;
+use App\Http\Controllers\Manajer\IncomingItem\ManajerIncomingItemController;
+use App\Http\Controllers\Manajer\Item\ManajerItemController;
+use App\Http\Controllers\Manajer\ItemType\ManajerItemTypeController;
+use App\Http\Controllers\Manajer\OutgoingItem\ManajerOutgoingItemController;
+use App\Http\Controllers\Manajer\UnitType\ManajerUnitTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,4 +73,28 @@ Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 
     Route::get('outgoing-report', [OutgoingItemReportController::class, 'index'])->name('outgoing-report.index');
     Route::get('outgoing-report/export-pdf', [OutgoingItemReportController::class, 'exportPdf'])->name('outgoing-report.exportPdf');
     Route::get('outgoing-report/export-excel', [OutgoingItemReportController::class, 'exportExcel'])->name('outgoing-report.exportExcel');
+});
+
+Route::group(['prefix' => 'manajer', 'as' => 'manajer.', 'middleware' => ['auth', 'role:Manajer']], function () {
+    Route::get('dashboard', [ManajerDashboardController::class, 'index'])->name('dashboard');
+
+    // Item
+    Route::get('item', [ManajerItemController::class, 'index'])->name('item.index');
+    Route::get('item/{id}/show', [ManajerItemController::class, 'show'])->name('item.show');
+
+    // Item Type
+    Route::get('item-type', [ManajerItemTypeController::class, 'index'])->name('item-type.index');
+    Route::get('item-type/{id}/show', [ManajerItemTypeController::class, 'show'])->name('item-type.show');
+
+    // Unit Type
+    Route::get('unit-type', [ManajerUnitTypeController::class, 'index'])->name('unit-type.index');
+    Route::get('unit-type/{id}/show', [ManajerUnitTypeController::class, 'show'])->name('unit-type.show');
+
+    // IncomingItem
+    Route::get('incoming-item', [ManajerIncomingItemController::class, 'index'])->name('incoming-item.index');
+    Route::get('incoming-item/{id}/show', [ManajerIncomingItemController::class, 'show'])->name('incoming-item.show');
+
+    // OutgoingItem
+    Route::get('outgoing-item', [ManajerOutgoingItemController::class, 'index'])->name('outgoing-item.index');
+    Route::get('outgoing-item/{id}/show', [ManajerOutgoingItemController::class, 'show'])->name('outgoing-item.show');
 });
