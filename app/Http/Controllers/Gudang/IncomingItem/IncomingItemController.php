@@ -105,7 +105,7 @@ class IncomingItemController extends Controller
             $incomingItem->delete();
 
             // Memberikan respons bahwa penghapusan berhasil
-            return response(['status' => 'success', 'message' => 'Berhasil menghapus barang masuk']);
+            return response(['status' => 'success', 'message' => 'Berhasil menghapus data barang masuk']);
         } catch (\Exception $e) {
             // Menangani exception jika terjadi kesalahan saat menghapus
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);

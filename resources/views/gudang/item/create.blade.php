@@ -38,9 +38,6 @@
                                         <input type="text" class="form-control @error('item_code') is-invalid @enderror"
                                             name="item_code" id="item_code" value="{{ old('item_code') }}"
                                             placeholder="Masukkan Kode Barang">
-                                        @error('item_code')
-                                            <div class="text-danger">*{{ message }}</div>
-                                        @enderror
                                     </div>
 
                                     <div class="form-group">
@@ -48,9 +45,6 @@
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                             name="name" id="name" value="{{ old('name') }}"
                                             placeholder="Masukkan Nama Barang">
-                                        @error('name')
-                                            <div class="text-danger">*{{ message }}</div>
-                                        @enderror
                                     </div>
 
                                     <div class="form-group">
@@ -62,9 +56,6 @@
                                                 <option value="{{ $itemType->id }}">{{ $itemType->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('item_type_id')
-                                            <div class="text-danger">*{{ message }}</div>
-                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="unit_type_id">Satuan Barang</label>
@@ -75,9 +66,6 @@
                                                 <option value="{{ $unitType->id }}">{{ $unitType->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('unit_type_id')
-                                            <div class="text-danger">*{{ message }}</div>
-                                        @enderror
                                     </div>
 
                                     <div class="form-group">
@@ -86,18 +74,12 @@
                                             class="form-control @error('reorder_level') is-invalid @enderror"
                                             name="reorder_level" id="reorder_level" value="{{ old('reorder_level') }}"
                                             placeholder="Masukkan Stock Barang Minimum">
-                                        @error('reorder_level')
-                                            <div class="text-danger">*{{ message }}</div>
-                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="price">Harga Barang</label>
                                         <input type="number" class="form-control @error('price') is-invalid @enderror"
                                             name="price" id="price" value="{{ old('price') }}"
                                             placeholder="Masukkan Harga Barang">
-                                        @error('price')
-                                            <div class="text-danger">*{{ message }}</div>
-                                        @enderror
                                     </div>
                                 </div>
 
@@ -117,9 +99,6 @@
                                         </div>
                                         <div class="text-info mt-2">*File harus berformat JPG, JPEG, PNG</div>
                                         <div class="text-info">*File harus berukuran 1000 KB</div>
-                                        @error('photo')
-                                            <div class="text-danger">*{{ message }}</div>
-                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -154,8 +133,7 @@
                     contentType: false, // Prevent jQuery from setting the content type
                     success: function(response) {
                         if (response.success) {
-                            sessionStorage.setItem('success',
-                                'Data barang berhasil disubmit.');
+                            sessionStorage.setItem('success', 'Data barang berhasil disubmit.');
                             window.location.href =
                                 "{{ route('gudang.item.index') }}"; // Redirect to index page
                         } else {
@@ -171,6 +149,11 @@
                             input.addClass('is-invalid');
                             input.next('.invalid-feedback').remove();
                             input.after('<div class="invalid-feedback">' + error + '</div>');
+
+                            if (field === 'photo') {
+                                $('#upload-text')
+                                    .hide(); // Hide "Choose File" text if there is an error
+                            }
                         }
 
                         const message = response.responseJSON.message ||
@@ -191,15 +174,38 @@
         });
 
         function previewImage(event) {
+            var file = event.target.files[0];
             var reader = new FileReader();
+            var output = document.getElementById('preview');
+            var uploadText = document.getElementById('upload-text');
+            var errorMessage = document.getElementById('error-message');
+
+            // Validasi ukuran file (maks 1MB)
+            if (file.size > 1024 * 1024) {
+                errorMessage.textContent = '*File harus berukuran maksimal 1000 KB';
+                errorMessage.style.display = 'block';
+                output.style.display = 'none';
+                uploadText.style.display = 'none';
+                return;
+            }
+
+            // Validasi format file
+            var validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!validImageTypes.includes(file.type)) {
+                errorMessage.textContent = '*File harus berformat JPG, JPEG, PNG';
+                errorMessage.style.display = 'block';
+                output.style.display = 'none';
+                uploadText.style.display = 'none';
+                return;
+            }
+
             reader.onload = function() {
-                var output = document.getElementById('preview');
-                var uploadText = document.getElementById('upload-text');
                 output.src = reader.result;
                 output.style.display = 'block';
                 uploadText.style.display = 'none'; // Hide the "Choose File" text
+                errorMessage.style.display = 'none'; // Hide error message
             };
-            reader.readAsDataURL(event.target.files[0]);
+            reader.readAsDataURL(file);
         }
     </script>
 @endpush

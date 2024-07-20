@@ -1,19 +1,18 @@
 @extends('gudang.layouts.master')
 
 @section('title-page')
-    Show
+    Lihat
 @endsection
 
 @section('content')
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Lihat Barang Masuk</h1>
+        <div class="d-lg-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 mt-2 text-gray-900">Lihat Barang Masuk</h1>
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
+                <ol class="breadcrumb mb-0 mt-2">
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('gudang.incoming-item.index') }}">Barang Masuk</a></li>
                     <li class="breadcrumb-item">Lihat</li>
                 </ol>
@@ -25,17 +24,20 @@
                 <!-- Basic Card Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Lihat Barang Masuk</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Informasi Barang Masuk</h6>
                     </div>
                     <div class="card-body">
                         <form>
                             @csrf
 
                             <div class="form-group">
-                                <label>Data Barang <span class="text-danger">(Kode Barang - Nama
-                                        Barang)</span></label>
-                                <input type="text" class="form-control"
-                                    value="{{ $item->item_code }} - {{ $item->name }}" disabled>
+                                <label>Kode Barang</label>
+                                <input type="text" class="form-control" value="{{ $item->item_code }}" disabled>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nama Barang</label>
+                                <input type="text" class="form-control" value="{{ $item->name }}" disabled>
                             </div>
 
                             <div class="form-group">
@@ -54,9 +56,7 @@
                         </form>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 @endsection

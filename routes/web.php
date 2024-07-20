@@ -40,6 +40,7 @@ Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/edit-profile', [ProfileController::class, 'editProfile'])->name('profile.editProfile');
     Route::put('profile/update-profile', [ProfileController::class, 'updateProfile'])->name('profile.updateProfile');
+    // Route untuk password
     Route::get('profile/edit-password', [ProfileController::class, 'editPassword'])->name('profile.editPassword');
     Route::put('profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 
