@@ -6,14 +6,12 @@
 
 @section('content')
     <div class="container-fluid">
-
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Edit Jenis Barang</h1>
+        <div class="d-lg-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 mt-2 text-gray-900">Edit Jenis Barang</h1>
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
+                <ol class="breadcrumb mb-0 mt-2">
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('gudang.item-type.index') }}">Jenis Barang</a></li>
                     <li class="breadcrumb-item">Edit</li>
                 </ol>
@@ -31,7 +29,6 @@
                         <form id="main-form" action="{{ route('gudang.item-type.update', $itemType->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-
                             <div class="form-group">
                                 <label for="name">Jenis Barang</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -40,15 +37,12 @@
                                     <div class="text-danger">*{{ $message }}</div>
                                 @enderror
                             </div>
-
                             <button type="submit" id="submit-btn" class="btn btn-success mt-3">Edit</button>
                             <a href="{{ route('gudang.item-type.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
                         </form>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 @endsection

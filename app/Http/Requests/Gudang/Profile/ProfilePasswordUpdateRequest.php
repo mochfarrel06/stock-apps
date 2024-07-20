@@ -27,10 +27,13 @@ class ProfilePasswordUpdateRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
+    public function messages()
     {
         return [
-            'current_password.current_password' => 'Current Password is invalid'
+            'current_password.required' => 'Password saat ini harus diisi.',
+            'password.required' => 'Password baru harus diisi.',
+            'password.confirmed' => 'Konfirmasi password tidak sesuai.',
+            'password.different' => 'Password baru harus berbeda dengan password saat ini.',
         ];
     }
 }

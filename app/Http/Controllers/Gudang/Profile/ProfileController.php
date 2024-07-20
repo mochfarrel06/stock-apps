@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Gudang\Profile\ProfilePasswordUpdateRequest;
 use App\Http\Requests\Gudang\Profile\ProfileUpdateRequest;
 use App\Traits\ProfileUploadTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -24,20 +23,32 @@ class ProfileController extends Controller
         return view('gudang.profile.editProfile');
     }
 
-    function updateProfile(ProfileUpdateRequest $request)
+    public function updateProfile(ProfileUpdateRequest $request)
     {
-        $userId = Auth::id();
-        $user = User::findOrFail($userId);
+        try {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
 
-        $imagePath = $this->uploadImage($request, 'avatar');
+            $imagePath = $this->uploadImage($request, 'avatar');
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->avatar = isset($imagePath) ? $imagePath : $user->avatar;
-        $user->username = $request->username;
-        $user->save();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->avatar = isset($imagePath) ? $imagePath : $user->avatar;
+            $user->username = $request->username;
 
-        return redirect()->route('gudang.profile.index');
+            // Cek apakah ada perubahan data
+            if ($user->isDirty()) {
+                $user->save();
+                session()->flash('success', 'Berhasil memperbarui data profil');
+                return response()->json(['success' => true], 200);
+            } else {
+                session()->flash('info', 'Tidak melakukan perubahan data profil');
+                return response()->json(['info' => true], 200);
+            }
+        } catch (\Exception $e) {
+            session()->flash('error', 'Terdapat kesalahan data profil: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
     }
 
     function editPassword()
@@ -47,12 +58,23 @@ class ProfileController extends Controller
 
     function updatePassword(ProfilePasswordUpdateRequest $request)
     {
-        $userId = Auth::id();
-        $user = User::findOrFail($userId);
+        try {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
 
-        $user->password = bcrypt($request->password);
-        $user->save();
+            $user->password = bcrypt($request->password);
 
-        return redirect()->route('gudang.profile.index');
+            if ($user->isDirty()) {
+                $user->save();
+                session()->flash('success', 'Berhasil memperbarui password');
+                return response()->json(['success' => true], 200);
+            } else {
+                session()->flash('info', 'Tidak melakukan perubahan password');
+                return response()->json(['info' => true], 200);
+            }
+        } catch (\Exception $e) {
+            session()->flash('error', 'Terdapat kesalahan password: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
     }
 }

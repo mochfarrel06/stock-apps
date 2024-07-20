@@ -8,12 +8,11 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Halaman Laporan Barang Keluar</h1>
+        <div class="d-lg-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 mt-2 text-gray-900">Halaman Laporan Barang Keluar</h1>
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.item.index') }}">Barang</a></li>
+                <ol class="breadcrumb mb-0 mt-2">
+                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item">Laporan Barang Keluar</li>
                 </ol>
             </nav>
@@ -23,33 +22,38 @@
             <div class="col-lg-12">
                 <div class="card shadow">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Filter Data Stok Barang</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Filter Data Barang Keluar</h6>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('gudang.outgoing-report.index') }}" method="GET">
                             @csrf
 
-                            <div class="col-md-6 p-0">
-                                <div class="form-group">
-                                    <label for="start_date">Tanggal Mulai</label>
-                                    <input type="date" name="start_date" id="start_date" class="form-control"
-                                        value="{{ request('start_date') }}">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="start_date">Tanggal Awal</label>
+                                        <input type="date" name="start_date" id="start_date" class="form-control"
+                                            value="{{ request('start_date') }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="end_date">Tanggal Akhir</label>
+                                        <input type="date" name="end_date" id="end_date" class="form-control"
+                                            value="{{ request('end_date') }}">
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-6 p-0">
-                                <div class="form-group">
-                                    <label for="end_date">Tanggal Mulai</label>
-                                    <input type="date" name="end_date" id="end_date" class="form-control"
-                                        value="{{ request('end_date') }}">
-                                </div>
+                            <div class="mt-3">
+                                <button type="submit" class="btn btn-primary mr-2 mb-2">Tampilkan Data</button>
+                                <a href="{{ route('gudang.outgoing-report.exportPdf', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}"
+                                    class="btn btn-warning mr-2 mb-2"><i class="fas fa-solid fa-file-pdf"></i> Export
+                                    PDF</a>
+                                <a href="{{ route('gudang.outgoing-report.exportExcel', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}"
+                                    class="btn btn-success mb-2"><i class="fa-solid fa-file-excel"></i> Export Excel</a>
                             </div>
-
-                            <button type="submit" class="btn btn-primary">Tampilkan Data</button>
-                            <a href="{{ route('gudang.outgoing-report.exportPdf', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}"
-                                class="btn btn-warning">Export PDF</a>
-                            <a href="{{ route('gudang.outgoing-report.exportExcel', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}"
-                                class="btn btn-success">Export Excel</a>
                         </form>
                     </div>
                 </div>
@@ -58,7 +62,7 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between ">
-                <h6 class="m-0 font-weight-bold text-primary">Table Laporan Data Barang</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Table Laporan Data Barang Keluar</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

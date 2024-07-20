@@ -6,15 +6,13 @@
 
 @section('content')
     <div class="container-fluid">
-
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Halaman Dashboard</h1>
+            <h1 class="h3 mb-0 text-gray-900">Halaman Dashboard</h1>
         </div>
 
         <!-- Content Row -->
         <div class="row">
-
             @foreach ($cards as $card)
                 <div class="col-xl-3 col-md-6 mb-4">
                     <div class="card border-left-{{ $card['bg_color'] }} shadow h-100 py-2">
@@ -35,9 +33,10 @@
             @endforeach
         </div>
 
-        <div class="card shadow mb-4 mt-5">
+        <div class="card shadow mb-4 mt-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between ">
-                <h6 class="m-0 font-weight-bold text-primary">Table stok barang yang telah mencapai batas minimum</h6>
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-circle-exclamation"></i> Table stok
+                    barang yang telah mencapai batas minimum</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
