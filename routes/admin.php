@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\OutgoingItem\OutgoingItemController;
 use App\Http\Controllers\Admin\OutgoingItem\OutgoingItemReportController;
 use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\Admin\UnitType\UnitTypeController;
+use App\Http\Controllers\Admin\UserManagement\UserManagementController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'role:Administrator'], function () {
@@ -47,4 +48,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'role:Admin
     Route::get('outgoing-report', [OutgoingItemReportController::class, 'index'])->name('outgoing-report.index');
     Route::get('outgoing-report/export-pdf', [OutgoingItemReportController::class, 'exportPdf'])->name('outgoing-report.exportPdf');
     Route::get('outgoing-report/export-excel', [OutgoingItemReportController::class, 'exportExcel'])->name('outgoing-report.exportExcel');
+
+    // ROute pengguna
+    Route::resource('user-management', UserManagementController::class);
 });

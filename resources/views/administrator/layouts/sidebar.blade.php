@@ -125,6 +125,21 @@
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Pengguna
+    </div>
+
+    <li class="nav-item {{ request()->routeIs('admin.user-management.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.user-management.index') }}">
+            <i class="fas fa-fw fa-solid fa-user"></i>
+            <span>Pengguna</span></a>
+    </li>
+    <!-- End nav item report -->
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
