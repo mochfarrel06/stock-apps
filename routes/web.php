@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Gudang\Dashboard\GudangDashboardController;
 use App\Http\Controllers\Gudang\IncomingItem\IncomingItemController;
@@ -36,6 +37,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
+});
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('login', [AdminAuthController::class, 'index'])->name('login');
+    Route::post('login', [AdminAuthController::class, 'store'])->name('store');
+    Route::post('logout', [AdminAuthController::class, 'destroy'])->name('destroy');
 });
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
