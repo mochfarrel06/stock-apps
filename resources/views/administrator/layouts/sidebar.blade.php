@@ -33,28 +33,6 @@
     <!-- End heading master -->
 
     <!-- Nav item barang -->
-    {{-- <li
-        class="nav-item {{ request()->routeIs('gudang.item.*') || request()->routeIs('gudang.item-type.*') || request()->routeIs('gudang.unit-type.*') ? 'active' : '' }}">
-        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseItem" aria-expanded="true"
-            aria-controls="collapseItem">
-            <i class="fas fa-box"></i>
-            <span>Barang</span>
-        </a>
-        <div id="collapseItem"
-            class="collapse {{ request()->routeIs('gudang.item.*') || request()->routeIs('gudang.item-type.*') || request()->routeIs('gudang.unit-type.*') ? 'show' : '' }}"
-            aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Barang</h6>
-                <a class="collapse-item {{ request()->routeIs('gudang.item.*') ? 'active' : '' }}"
-                    href="{{ route('gudang.item.index') }}">Data Barang</a>
-                <a class="collapse-item {{ request()->routeIs('gudang.item-type.*') ? 'active' : '' }}"
-                    href="{{ route('gudang.item-type.index') }}">Jenis Barang</a>
-                <a class="collapse-item {{ request()->routeIs('gudang.unit-type.*') ? 'active' : '' }}"
-                    href="{{ route('gudang.unit-type.index') }}">Satuan Barang</a>
-            </div>
-        </div>
-    </li> --}}
-
     <li
         class="nav-item {{ request()->routeIs('admin.item.*') || request()->routeIs('admin.item-type.*') || request()->routeIs('admin.unit-type.*') ? 'active' : '' }}">
         <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseItem" aria-expanded="true"
