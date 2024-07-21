@@ -100,27 +100,28 @@
     <!-- End heading -->
 
     <!-- Nav item report -->
-    {{-- <li
-        class="nav-item {{ request()->routeIs('gudang.item-report.*') || request()->routeIs('gudang.incoming-report.*') || request()->routeIs('gudang.outgoing-report.*') ? 'active' : '' }}">
+    <li
+        class="nav-item {{ request()->routeIs('manajer.item-report.*') || request()->routeIs('manajer.incoming-report.*') || request()->routeIs('manajer.outgoing-report.*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseReport"
             aria-expanded="true" aria-controls="collapseReport">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Laporan</span>
         </a>
         <div id="collapseReport"
-            class="collapse {{ request()->routeIs('gudang.item-report.*') || request()->routeIs('gudang.incoming-report.*') || request()->routeIs('gudang.outgoing-report.*') ? 'show' : '' }}"
+            class="collapse {{ request()->routeIs('manajer.item-report.*') || request()->routeIs('manajer.incoming-report.*') || request()->routeIs('manajer.outgoing-report.*') ? 'show' : '' }}"
             aria-labelledby="headingReport" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Laporan</h6>
-                <a class="collapse-item {{ request()->routeIs('gudang.item-report.*') ? 'active' : '' }}"
-                    href="{{ route('gudang.item-report.index') }}">Laporan Data Barang</a>
-                <a class="collapse-item {{ request()->routeIs('gudang.incoming-report.*') ? 'active' : '' }}"
-                    href="{{ route('gudang.incoming-report.index') }}">Laporan Barang Masuk</a>
-                <a class="collapse-item {{ request()->routeIs('gudang.outgoing-report.*') ? 'active' : '' }}"
-                    href="{{ route('gudang.outgoing-report.index') }}">Laporan Barang Keluar</a>
+                <a class="collapse-item {{ request()->routeIs('manajer.item-report.*') ? 'active' : '' }}"
+                    href="{{ route('manajer.item-report.index') }}">Laporan Data Barang</a>
+                <a class="collapse-item {{ request()->routeIs('manajer.incoming-report.*') ? 'active' : '' }}"
+                    href="{{ route('manajer.incoming-report.index') }}">Laporan Barang Masuk</a>
+                <a class="collapse-item {{ request()->routeIs('manajer.outgoing-report.*') ? 'active' : '' }}"
+                    href="{{ route('manajer.outgoing-report.index') }}">Laporan Barang Keluar</a>
             </div>
         </div>
-    </li> --}}
+    </li>
+
     <!-- End nav item report -->
 
     <!-- Divider -->

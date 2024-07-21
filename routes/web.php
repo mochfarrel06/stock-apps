@@ -13,9 +13,13 @@ use App\Http\Controllers\Gudang\Profile\ProfileController;
 use App\Http\Controllers\Gudang\UnitType\UnitTypeController;
 use App\Http\Controllers\Manajer\Dashboard\ManajerDashboardController;
 use App\Http\Controllers\Manajer\IncomingItem\ManajerIncomingItemController;
+use App\Http\Controllers\Manajer\IncomingItem\ManajerIncomingItemReportController;
 use App\Http\Controllers\Manajer\Item\ManajerItemController;
+use App\Http\Controllers\Manajer\Item\ManajerItemReportController;
 use App\Http\Controllers\Manajer\ItemType\ManajerItemTypeController;
 use App\Http\Controllers\Manajer\OutgoingItem\ManajerOutgoingItemController;
+use App\Http\Controllers\Manajer\OutgoingItem\ManajerOutgoingItemReportController;
+use App\Http\Controllers\Manajer\Profile\ManajerProfileController;
 use App\Http\Controllers\Manajer\UnitType\ManajerUnitTypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -76,11 +80,23 @@ Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => ['auth', 
 });
 
 Route::group(['prefix' => 'manajer', 'as' => 'manajer.', 'middleware' => ['auth', 'role:Manajer']], function () {
+    // Route Dashboard
     Route::get('dashboard', [ManajerDashboardController::class, 'index'])->name('dashboard');
+
+    // Route untuk profile pengguna
+    Route::get('profile', [ManajerProfileController::class, 'index'])->name('profile.index');
+    Route::get('profile/edit-profile', [ManajerProfileController::class, 'editProfile'])->name('profile.editProfile');
+    Route::put('profile/update-profile', [ManajerProfileController::class, 'updateProfile'])->name('profile.updateProfile');
+    // Route untuk password
+    Route::get('profile/edit-password', [ManajerProfileController::class, 'editPassword'])->name('profile.editPassword');
+    Route::put('profile/update-password', [ManajerProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 
     // Item
     Route::get('item', [ManajerItemController::class, 'index'])->name('item.index');
     Route::get('item/{id}/show', [ManajerItemController::class, 'show'])->name('item.show');
+    Route::get('item-report', [ManajerItemReportController::class, 'index'])->name('item-report.index');
+    Route::get('item-report/export', [ManajerItemReportController::class, 'exportPdf'])->name('item-report.exportPdf');
+    Route::get('item-report/export-excel', [ManajerItemReportController::class, 'exportExcel'])->name('item-report.exportExcel');
 
     // Item Type
     Route::get('item-type', [ManajerItemTypeController::class, 'index'])->name('item-type.index');
@@ -93,8 +109,14 @@ Route::group(['prefix' => 'manajer', 'as' => 'manajer.', 'middleware' => ['auth'
     // IncomingItem
     Route::get('incoming-item', [ManajerIncomingItemController::class, 'index'])->name('incoming-item.index');
     Route::get('incoming-item/{id}/show', [ManajerIncomingItemController::class, 'show'])->name('incoming-item.show');
+    Route::get('incoming-report', [ManajerIncomingItemReportController::class, 'index'])->name('incoming-report.index');
+    Route::get('incoming-report/export-pdf', [ManajerIncomingItemReportController::class, 'exportPdf'])->name('incoming-report.exportPdf');
+    Route::get('incoming-report/export-excel', [ManajerIncomingItemReportController::class, 'exportExcel'])->name('incoming-report.exportExcel');
 
     // OutgoingItem
     Route::get('outgoing-item', [ManajerOutgoingItemController::class, 'index'])->name('outgoing-item.index');
     Route::get('outgoing-item/{id}/show', [ManajerOutgoingItemController::class, 'show'])->name('outgoing-item.show');
+    Route::get('outgoing-report', [ManajerOutgoingItemReportController::class, 'index'])->name('outgoing-report.index');
+    Route::get('outgoing-report/export-pdf', [ManajerOutgoingItemReportController::class, 'exportPdf'])->name('outgoing-report.exportPdf');
+    Route::get('outgoing-report/export-excel', [ManajerOutgoingItemReportController::class, 'exportExcel'])->name('outgoing-report.exportExcel');
 });
