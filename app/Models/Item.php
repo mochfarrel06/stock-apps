@@ -97,4 +97,12 @@ class Item extends Model
     {
         return $this->hasMany(OutgoingItem::class);
     }
+
+    /**
+     * Method untuk menghitung stok barang minimum
+     */
+    public function scopeLowStock($query)
+    {
+        return $query->whereColumn('stock', '<=', 'reorder_level');
+    }
 }

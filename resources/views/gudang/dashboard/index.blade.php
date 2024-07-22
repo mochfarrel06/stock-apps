@@ -35,8 +35,8 @@
 
         <div class="card shadow mb-4 mt-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between ">
-                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-circle-exclamation"></i> Table stok
-                    barang yang telah mencapai batas minimum</h6>
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-circle-exclamation"></i> Table stok barang
+                    minimum</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -52,7 +52,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($items as $item)
+                            @foreach ($data as $item)
                                 <tr>
                                     <td class="index">{{ $loop->index + 1 }}</td>
                                     <td>{{ $item->item_code ?? '' }}</td>
