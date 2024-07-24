@@ -1,12 +1,8 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    <!-- Sidebar title -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('gudang.dashboard') }}">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-solid fa-book"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">codeFa</div>
-    </a>
+
+    <!-- Start sidebar title -->
+    <x-sidebar.title :name="'codeFa'" :icon="'fas fa-solid fa-book'" :addRoute="'gudang.dashboard'" />
     <!-- End sidebar title -->
 
     <!-- Divider -->
@@ -14,12 +10,7 @@
     <!-- End divider -->
 
     <!-- Nav item dashboard -->
-    <li class="nav-item {{ request()->routeIs('gudang.dashboard') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('gudang.dashboard') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-        </a>
-    </li>
+    <x-sidebar.nav-item route="gudang.dashboard" icon="fa-tachometer-alt" label="Dashboard" />
     <!-- End nav item dashboard -->
 
     <!-- Divider -->
@@ -33,27 +24,11 @@
     <!-- End heading master -->
 
     <!-- Nav item barang -->
-    <li
-        class="nav-item {{ request()->routeIs('gudang.item.*') || request()->routeIs('gudang.item-type.*') || request()->routeIs('gudang.unit-type.*') ? 'active' : '' }}">
-        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseItem" aria-expanded="true"
-            aria-controls="collapseItem">
-            <i class="fas fa-box"></i>
-            <span>Barang</span>
-        </a>
-        <div id="collapseItem"
-            class="collapse {{ request()->routeIs('gudang.item.*') || request()->routeIs('gudang.item-type.*') || request()->routeIs('gudang.unit-type.*') ? 'show' : '' }}"
-            aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Barang</h6>
-                <a class="collapse-item {{ request()->routeIs('gudang.item.*') ? 'active' : '' }}"
-                    href="{{ route('gudang.item.index') }}">Data Barang</a>
-                <a class="collapse-item {{ request()->routeIs('gudang.item-type.*') ? 'active' : '' }}"
-                    href="{{ route('gudang.item-type.index') }}">Jenis Barang</a>
-                <a class="collapse-item {{ request()->routeIs('gudang.unit-type.*') ? 'active' : '' }}"
-                    href="{{ route('gudang.unit-type.index') }}">Satuan Barang</a>
-            </div>
-        </div>
-    </li>
+    <x-sidebar.nav-item icon="fa-box" label="Barang" collapseId="collapseItem" :routes="['gudang.item.*', 'gudang.item-type.*', 'gudang.unit-type.*']" :subItems="[
+        ['route' => 'gudang.item.index', 'label' => 'Data Barang'],
+        ['route' => 'gudang.item-type.index', 'label' => 'Jenis Barang'],
+        ['route' => 'gudang.unit-type.index', 'label' => 'Satuan Barang'],
+    ]" />
     <!-- End nav item -->
 
     <!-- Divider -->

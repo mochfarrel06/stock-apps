@@ -17,10 +17,9 @@
         </div>
 
         <div class="card shadow mb-4 mt-4">
-            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between ">
-                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-circle-exclamation"></i> Table stok barang
-                    minimum</h6>
-            </div>
+
+            <x-table-header :title="'Tabel Data Barang Minimum'" :icon="'fas fa-circle-exclamation'" />
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

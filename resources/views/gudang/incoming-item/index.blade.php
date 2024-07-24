@@ -19,7 +19,7 @@
         </div>
 
         <div class="card shadow mb-4">
-            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between ">
+            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary mb-2">Table Barang Masuk</h6>
                 <a href="{{ route('gudang.incoming-item.create') }}"
                     class="d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-2">Tambah Data</a>
@@ -57,5 +57,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 @endsection

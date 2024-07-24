@@ -79,7 +79,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                @include('gudang.layouts.navbar')
+                <x-navbar :routeActive="'gudang.profile.*'" :routeLink="'gudang.profile.index'" />
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
