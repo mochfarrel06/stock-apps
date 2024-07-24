@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 
 class NavItem extends Component
 {
+    public $title;
     public $route;
     public $icon;
     public $label;
@@ -18,7 +19,7 @@ class NavItem extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($icon, $label, $collapseId = null, $routes = [], $subItems = [], $route = null)
+    public function __construct($icon, $label, $title = null, $collapseId = null, $routes = [], $subItems = [], $route = null)
     {
         $this->route = $route;
         $this->icon = $icon;
@@ -26,6 +27,7 @@ class NavItem extends Component
         $this->routes = $routes;
         $this->collapseId = $collapseId;
         $this->subItems = $subItems;
+        $this->title = $title;
     }
 
     public function isActive()

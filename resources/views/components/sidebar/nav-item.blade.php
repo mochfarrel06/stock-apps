@@ -1,7 +1,10 @@
 @if ($subItems)
+    <div class="sidebar-heading">
+        {{ $title }}
+    </div>
     <li class="nav-item {{ $isActive() ? 'active' : '' }}">
-        <a class="nav-link collapsed" data-toggle="collapse" data-target="#{{ $collapseId }}" aria-expanded="true"
-            aria-controls="{{ $collapseId }}">
+        <a class="nav-link collapsed" data-toggle="collapse" href="" data-target="#{{ $collapseId }}"
+            aria-expanded="true" aria-controls="{{ $collapseId }}">
             <i class="fas {{ $icon }}"></i>
             <span>{{ $label }}</span>
         </a>
@@ -16,6 +19,7 @@
             </div>
         </div>
     </li>
+    <hr class="sidebar-divider">
 @else
     <li class="nav-item {{ $isActive() ? 'active' : '' }}">
         <a class="nav-link" href="{{ route($route) }}">
@@ -23,4 +27,5 @@
             <span>{{ $label }}</span>
         </a>
     </li>
+    <hr class="sidebar-divider">
 @endif
