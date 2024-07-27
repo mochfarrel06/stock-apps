@@ -15,7 +15,7 @@
 
         <x-content.table-container>
 
-            <x-content.table-header :title="'Tambah Data Barang'" />
+            <x-content.table-header :title="'Tambah Data Barang'" :icon="'fas fa-solid fa-plus'" />
 
             <x-content.card-body>
                 <form id="main-form" action="{{ route('gudang.item.store') }}" method="POST" enctype="multipart/form-data">
@@ -32,14 +32,14 @@
 
                             <div class="form-group">
                                 <label for="name">Nama Barang</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                <input type="text" class="form-control @error('item_code') is-invalid @enderror"
                                     name="name" id="name" value="{{ old('name') }}"
                                     placeholder="Masukkan Nama Barang">
                             </div>
 
                             <div class="form-group">
                                 <label for="item_type_id">Jenis Barang</label>
-                                <select class="form-control @error('item_type_id') is-invalid @enderror" name="item_type_id"
+                                <select class="form-control @error('item_code') is-invalid @enderror" name="item_type_id"
                                     id="item_type_id">
                                     <option value="">-- Pilih Jenis Barang --</option>
                                     @foreach ($itemTypes as $itemType)
@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="unit_type_id">Satuan Barang</label>
-                                <select class="form-control @error('unit_type_id') is-invalid @enderror" name="unit_type_id"
+                                <select class="form-control @error('item_code') is-invalid @enderror" name="unit_type_id"
                                     id="unit_type_id">
                                     <option value="">-- Pilih Satuan Barang --</option>
                                     @foreach ($unitTypes as $unitType)
@@ -60,13 +60,13 @@
 
                             <div class="form-group">
                                 <label for="reorder_level">Stock Barang Minimum*</label>
-                                <input type="number" class="form-control @error('reorder_level') is-invalid @enderror"
+                                <input type="number" class="form-control @error('item_code') is-invalid @enderror"
                                     name="reorder_level" id="reorder_level" value="{{ old('reorder_level') }}"
                                     placeholder="Masukkan Stock Barang Minimum">
                             </div>
                             <div class="form-group">
                                 <label for="price">Harga Barang</label>
-                                <input type="number" class="form-control @error('price') is-invalid @enderror"
+                                <input type="number" class="form-control @error('item_code') is-invalid @enderror"
                                     name="price" id="price" value="{{ old('price') }}"
                                     placeholder="Masukkan Harga Barang">
                             </div>
@@ -76,8 +76,8 @@
                             <div class="form-group">
                                 <label for="photo" class="form-label">Gambar Produk</label>
                                 <div class="image-upload-wrapper">
-                                    <input class="form-control" type="file" id="photo" name="photo"
-                                        onchange="previewImage(event)">
+                                    <input class="form-control @error('item_code') is-invalid @enderror" type="file"
+                                        id="photo" name="photo" onchange="previewImage(event)">
                                     <div class="image-upload-text" id="upload-text">
                                         Choose File
                                     </div>
@@ -109,7 +109,7 @@
                 event.preventDefault();
 
                 const form = $(this)[0];
-                const formData = new FormData(form); // Create FormData object with form data
+                const formData = new FormData(form);
 
                 submitBtn.prop('disabled', true).text('Loading...');
 
@@ -117,13 +117,13 @@
                     url: form.action,
                     method: 'POST',
                     data: formData,
-                    processData: false, // Prevent jQuery from processing the data
-                    contentType: false, // Prevent jQuery from setting the content type
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
                         if (response.success) {
                             sessionStorage.setItem('success', 'Data barang berhasil disubmit.');
                             window.location.href =
-                                "{{ route('gudang.item.index') }}"; // Redirect to index page
+                                "{{ route('gudang.item.index') }}";
                         } else {
                             $('#flash-messages').html('<div class="alert alert-danger">' +
                                 response.error + '</div>');
@@ -140,7 +140,7 @@
 
                             if (field === 'photo') {
                                 $('#upload-text')
-                                    .hide(); // Hide "Choose File" text if there is an error
+                                    .hide();
                             }
                         }
 
@@ -162,11 +162,11 @@
         });
 
         function previewImage(event) {
-            var file = event.target.files[0];
-            var reader = new FileReader();
-            var output = document.getElementById('preview');
-            var uploadText = document.getElementById('upload-text');
-            var errorMessage = document.getElementById('error-message');
+            let file = event.target.files[0];
+            let reader = new FileReader();
+            let output = document.getElementById('preview');
+            let uploadText = document.getElementById('upload-text');
+            let errorMessage = document.getElementById('error-message');
 
             // Validasi ukuran file (maks 1MB)
             if (file.size > 1024 * 1024) {
@@ -178,7 +178,7 @@
             }
 
             // Validasi format file
-            var validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            let validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
             if (!validImageTypes.includes(file.type)) {
                 errorMessage.textContent = '*File harus berformat JPG, JPEG, PNG';
                 errorMessage.style.display = 'block';
