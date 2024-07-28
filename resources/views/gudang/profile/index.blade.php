@@ -50,6 +50,11 @@
                                 <input type="text" class="form-control" value="{{ auth()->user()->username }}" disabled>
                             </div>
 
+                            <div class="form-group">
+                                <label>Role</label>
+                                <input type="text" class="form-control" value="{{ auth()->user()->role }}" disabled>
+                            </div>
+
                             <a href="{{ route('gudang.profile.editProfile') }}" class="btn btn-success mt-3 mr-2">Edit
                                 Profil</a>
                             <a href="{{ route('gudang.profile.editPassword') }}" class="btn btn-warning mt-3">Ganti
