@@ -23,7 +23,7 @@ class IncomingItemUpdateRequest extends FormRequest
     {
         return [
             'item_id' => ['required', 'numeric'],
-            'quantity' => ['required', 'numeric', 'min:0'],
+            'quantity' => ['required', 'numeric', 'min:1'],
         ];
     }
 
@@ -31,7 +31,8 @@ class IncomingItemUpdateRequest extends FormRequest
     {
         return [
             'item_id.required' => 'Data barang tidak boleh kosong',
-            'quantity.required' => 'Jumlah barang masuk tidak boleh kosong'
+            'quantity.required' => 'Jumlah barang masuk tidak boleh kosong',
+            'quantity.min' => 'Jumlah barang masuk tidak boleh kurang dari 1'
         ];
     }
 }
