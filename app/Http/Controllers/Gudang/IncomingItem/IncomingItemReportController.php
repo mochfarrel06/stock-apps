@@ -40,7 +40,7 @@ class IncomingItemReportController extends Controller
         $incomingItems = $this->getFilteredData($startDate, $endDate);
 
         $pdf = Pdf::loadView('gudang.incoming-report.exportPdf', compact('startDate', 'endDate', 'incomingItems'));
-        return $pdf->download('laporan_data_barang.pdf');
+        return $pdf->download('laporan_barang_masuk.pdf');
     }
 
     public function exportExcel(Request $request)
@@ -50,6 +50,6 @@ class IncomingItemReportController extends Controller
 
         $incomingItems = $this->getFilteredData($startDate, $endDate);
 
-        return Excel::download(new IncomingExport($incomingItems), 'laporan.xlsx');
+        return Excel::download(new IncomingExport($incomingItems), 'laporan_barang_masuk.xlsx');
     }
 }
