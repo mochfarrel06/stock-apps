@@ -78,19 +78,17 @@
                                 <div class="image-upload-wrapper">
                                     <input class="form-control @error('item_code') is-invalid @enderror" type="file"
                                         id="photo" name="photo" onchange="previewImage(event)">
-                                    <div class="image-upload-text" id="upload-text">
-                                        Choose File
-                                    </div>
+                                    <div class="image-upload-text" id="upload-text">Choose File</div>
                                     <div class="preview-image mt-3">
                                         <img id="preview" src="#" alt="Gambar Produk" style="display: none;">
                                     </div>
+                                    <div id="error-message" class="text-danger mt-2" style="display: none;"></div>
                                 </div>
                                 <div class="text-info mt-2">*File harus berformat JPG, JPEG, PNG</div>
                                 <div class="text-info">*File harus berukuran 1000 KB</div>
                             </div>
                         </div>
                     </div>
-
                     <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Tambah</button>
                     <a href="{{ route('gudang.item.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
                 </form>
@@ -111,6 +109,30 @@
                 const form = $(this)[0];
                 const formData = new FormData(form);
 
+                // Validasi ukuran dan format file
+                const file = $('#photo')[0].files[0];
+                const errorMessage = $('#error-message');
+                let valid = true;
+
+                if (file) {
+                    if (file.size > 1024 * 1024) {
+                        errorMessage.text('*File harus berukuran maksimal 1000 KB');
+                        errorMessage.show();
+                        valid = false;
+                    }
+
+                    const validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                    if (!validImageTypes.includes(file.type)) {
+                        errorMessage.text('*File harus berformat JPG, JPEG, PNG');
+                        errorMessage.show();
+                        valid = false;
+                    }
+                }
+
+                if (!valid) {
+                    return;
+                }
+
                 submitBtn.prop('disabled', true).text('Loading...');
 
                 $.ajax({
@@ -122,8 +144,7 @@
                     success: function(response) {
                         if (response.success) {
                             sessionStorage.setItem('success', 'Data barang berhasil disubmit.');
-                            window.location.href =
-                                "{{ route('gudang.item.index') }}";
+                            window.location.href = "{{ route('gudang.item.index') }}";
                         } else {
                             $('#flash-messages').html('<div class="alert alert-danger">' +
                                 response.error + '</div>');
@@ -139,8 +160,7 @@
                             input.after('<div class="invalid-feedback">' + error + '</div>');
 
                             if (field === 'photo') {
-                                $('#upload-text')
-                                    .hide();
+                                $('#upload-text').hide();
                             }
                         }
 
@@ -158,42 +178,21 @@
             $('input, select, textarea').on('input change', function() {
                 $(this).removeClass('is-invalid');
                 $(this).next('.invalid-feedback').text('');
+                $('#error-message').hide();
             });
         });
 
         function previewImage(event) {
-            let file = event.target.files[0];
             let reader = new FileReader();
             let output = document.getElementById('preview');
             let uploadText = document.getElementById('upload-text');
-            let errorMessage = document.getElementById('error-message');
-
-            // Validasi ukuran file (maks 1MB)
-            if (file.size > 1024 * 1024) {
-                errorMessage.textContent = '*File harus berukuran maksimal 1000 KB';
-                errorMessage.style.display = 'block';
-                output.style.display = 'none';
-                uploadText.style.display = 'none';
-                return;
-            }
-
-            // Validasi format file
-            let validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-            if (!validImageTypes.includes(file.type)) {
-                errorMessage.textContent = '*File harus berformat JPG, JPEG, PNG';
-                errorMessage.style.display = 'block';
-                output.style.display = 'none';
-                uploadText.style.display = 'none';
-                return;
-            }
 
             reader.onload = function() {
                 output.src = reader.result;
                 output.style.display = 'block';
-                uploadText.style.display = 'none'; // Hide the "Choose File" text
-                errorMessage.style.display = 'none'; // Hide error message
+                uploadText.style.display = 'none'; // Sembunyikan teks "Choose File"
             };
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(event.target.files[0]);
         }
     </script>
 @endpush

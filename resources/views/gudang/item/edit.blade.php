@@ -83,18 +83,16 @@
                                 <div class="image-upload-wrapper">
                                     <input class="form-control" type="file" id="photo" name="photo"
                                         onchange="previewImage(event)">
-
-                                    <!-- Tampilkan gambar yang sudah ada -->
                                     <div class="preview-image mt-3">
                                         <img id="preview" src="{{ $item->photo ? asset($item->photo) : '#' }}"
                                             alt="Gambar Produk"
                                             style="{{ $item->photo ? 'display: block;' : 'display: none;' }}">
                                     </div>
-
                                     <div class="image-upload-text" id="upload-text"
                                         style="{{ $item->photo ? 'display: none;' : 'display: block;' }}">
                                         Choose File
                                     </div>
+                                    <div id="error-message" class="text-danger mt-2" style="display: none;"></div>
                                 </div>
                                 <div class="text-info mt-2">*File harus berformat JPG, JPEG, PNG</div>
                                 <div class="text-info">*File harus berukuran 1000 KB</div>
@@ -114,71 +112,71 @@
 
 @push('scripts')
     <script>
-        // Handle form submission using AJAX
-        $('#main-form').on('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+        $(document).ready(function() {
+            $('#main-form').on('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
 
-            const form = $(this);
-            const formData = new FormData(form[0]); // Use FormData to handle file uploads
-            const submitButton = $('#submit-btn');
-            submitButton.prop('disabled', true).text('Loading...');
+                const form = $(this);
+                const formData = new FormData(form[0]); // Use FormData to handle file uploads
+                const submitButton = $('#submit-btn');
+                submitButton.prop('disabled', true).text('Loading...');
 
-            $.ajax({
-                url: form.attr('action'),
-                method: 'POST', // Use POST for form submission
-                data: formData,
-                contentType: false, // Prevent jQuery from setting content type
-                processData: false, // Prevent jQuery from processing data
-                success: function(response) {
-                    if (response.success) {
-                        // Flash message sukses
-                        sessionStorage.setItem('success',
-                            'Data barang berhasil disubmit.');
-                        window.location.href =
+                $.ajax({
+                    url: form.attr('action'),
+                    method: 'POST', // Use POST for form submission
+                    data: formData,
+                    contentType: false, // Prevent jQuery from setting content type
+                    processData: false, // Prevent jQuery from processing data
+                    success: function(response) {
+                        if (response.success) {
+                            // Flash message sukses
+                            sessionStorage.setItem('success', 'Data barang berhasil disubmit.');
+                            window.location.href =
                             "{{ route('gudang.item.index') }}"; // Redirect to index page
-                    } else if (response.info) {
-                        // Flash message info
-                        sessionStorage.setItem('info',
-                            'Tidak melakukan perubahan pada data barang.');
-                        window.location.href =
+                        } else if (response.info) {
+                            // Flash message info
+                            sessionStorage.setItem('info',
+                                'Tidak melakukan perubahan pada data barang.');
+                            window.location.href =
                             "{{ route('gudang.item.index') }}"; // Redirect to index page
-                    } else {
-                        // Flash message error
-                        $('#flash-messages').html('<div class="alert alert-danger">' +
-                            response.error + '</div>');
-                    }
-                },
-                error: function(response) {
-                    const errors = response.responseJSON.errors;
-                    for (let field in errors) {
-                        let input = $('[name=' + field + ']');
-                        let error = errors[field][0];
-                        input.addClass('is-invalid');
-                        // Remove existing invalid feedback to avoid duplicates
-                        input.next('.invalid-feedback').remove();
-                        input.after('<div class="invalid-feedback">' + error + '</div>');
-
-                        if (field === 'photo') {
-                            $('#upload-text')
-                                .hide(); // Hide "Choose File" text if there is an error
+                        } else {
+                            // Flash message error
+                            $('#flash-messages').html('<div class="alert alert-danger">' +
+                                response.error + '</div>');
                         }
+                    },
+                    error: function(response) {
+                        const errors = response.responseJSON.errors;
+                        for (let field in errors) {
+                            let input = $('[name=' + field + ']');
+                            let error = errors[field][0];
+                            input.addClass('is-invalid');
+                            // Remove existing invalid feedback to avoid duplicates
+                            input.next('.invalid-feedback').remove();
+                            input.after('<div class="invalid-feedback">' + error + '</div>');
+
+                            if (field === 'photo') {
+                                $('#upload-text')
+                            .hide(); // Hide "Choose File" text if there is an error
+                            }
+                        }
+
+                        const message = response.responseJSON.message ||
+                            'Terdapat kesalahan pada data barang.';
+                        $('#flash-messages').html('<div class="alert alert-danger">' + message +
+                            '</div>');
+                    },
+                    complete: function() {
+                        submitButton.prop('disabled', false).text('Edit');
                     }
-
-                    const message = response.responseJSON.message ||
-                        'Terdapat kesalahan pada data barang.';
-                    $('#flash-messages').html('<div class="alert alert-danger">' + message +
-                        '</div>');
-                },
-                complete: function() {
-                    submitButton.prop('disabled', false).text('Edit');
-                }
+                });
             });
-        });
 
-        // Remove validation error on input change
-        $('input, select, textarea').on('input change', function() {
-            $(this).removeClass('is-invalid');
-            $(this).next('.invalid-feedback').remove();
+            // Remove validation error on input change
+            $('input, select, textarea').on('input change', function() {
+                $(this).removeClass('is-invalid');
+                $(this).next('.invalid-feedback').remove();
+            });
         });
 
         function previewImage(event) {
@@ -188,31 +186,12 @@
             let uploadText = document.getElementById('upload-text');
             let errorMessage = document.getElementById('error-message');
 
-            // Validasi ukuran file (maks 1MB)
-            if (file.size > 1024 * 1024) {
-                errorMessage.textContent = '*File harus berukuran maksimal 1000 KB';
-                errorMessage.style.display = 'block';
-                output.style.display = 'none';
-                uploadText.style.display = 'none';
-                return;
-            }
-
-            // Validasi format file
-            let validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-            if (!validImageTypes.includes(file.type)) {
-                errorMessage.textContent = '*File harus berformat JPG, JPEG, PNG';
-                errorMessage.style.display = 'block';
-                output.style.display = 'none';
-                uploadText.style.display = 'none';
-                return;
-            }
-
             reader.onload = function() {
                 output.src = reader.result;
                 output.style.display = 'block';
                 uploadText.style.display = 'none'; // Hide the "Choose File" text
-                errorMessage.style.display = 'none'; // Hide error message
             };
+
             reader.readAsDataURL(file);
         }
     </script>
