@@ -5,56 +5,46 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <x-content.container-fluid>
 
-        <!-- Page Heading -->
-        <div class="d-lg-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 mt-2 text-gray-900">Password</h1>
-        </div>
+        <x-content.heading-page :title="'Halaman Edit Password'" />
 
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- Basic Card Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Edit Password</h6>
+        <x-content.table-container>
+
+            <x-content.table-header :title="'Edit Password'" :icon="'fas fa-solid fa-lock'" />
+
+            <x-content.card-body>
+                <form id="main-form" action="{{ route('manajer.profile.updatePassword') }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="form-group">
+                        <label for="current_password">Current Password</label>
+                        <input type="password" id="current_password" name="current_password" class="form-control">
+                        @error('current_password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div class="card-body">
-                        <form id="main-form" action="{{ route('manajer.profile.updatePassword') }}" method="POST">
-                            @csrf
-                            @method('PUT')
-
-                            <div class="form-group">
-                                <label for="current_password">Current Password</label>
-                                <input type="password" id="current_password" name="current_password" class="form-control">
-                                @error('current_password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" name="password" class="form-control">
-                                @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="password_confirmation">Password Confirmation</label>
-                                <input type="password" id="password_confirmation" name="password_confirmation"
-                                    class="form-control">
-                            </div>
-
-                            <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Edit</button>
-                            <a href="{{ route('manajer.profile.index') }}" class="btn btn-warning ml-2 mt-3">Kembali</a>
-                        </form>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control">
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="password_confirmation">Password Confirmation</label>
+                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                    </div>
 
-            </div>
+                    <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Edit</button>
+                    <a href="{{ route('manajer.profile.index') }}" class="btn btn-warning ml-2 mt-3">Kembali</a>
+                </form>
+            </x-content.card-body>
 
-        </div>
+        </x-content.table-container>
 
-    </div>
+    </x-content.container-fluid>
 @endsection
 
 @push('scripts')
