@@ -44,6 +44,7 @@
                                                 style="{{ auth()->user()->avatar ? 'display: none;' : 'display: block;' }}">
                                                 Choose File
                                             </div>
+                                            <div id="error-message" class="text-danger mt-2" style="display: none;"></div>
                                         </div>
                                         <div class="text-info mt-2">*File harus berformat JPG, JPEG, PNG</div>
                                         <div class="text-info">*File harus berukuran 1000 KB</div>
@@ -127,6 +128,11 @@
                         // Remove existing invalid feedback to avoid duplicates
                         input.next('.invalid-feedback').remove();
                         input.after('<div class="invalid-feedback">' + error + '</div>');
+
+                        if (field === 'photo') {
+                            $('#upload-text')
+                                .hide(); // Hide "Choose File" text if there is an error
+                        }
                     }
 
                     const message = response.responseJSON.message ||
@@ -145,5 +151,21 @@
             $(this).removeClass('is-invalid');
             $(this).next('.invalid-feedback').remove();
         });
+
+        function previewImage(event) {
+            let file = event.target.files[0];
+            let reader = new FileReader();
+            let output = document.getElementById('preview');
+            let uploadText = document.getElementById('upload-text');
+            let errorMessage = document.getElementById('error-message');
+
+            reader.onload = function() {
+                output.src = reader.result;
+                output.style.display = 'block';
+                uploadText.style.display = 'none'; // Hide the "Choose File" text
+            };
+
+            reader.readAsDataURL(file);
+        }
     </script>
 @endpush

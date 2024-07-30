@@ -5,51 +5,37 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <x-content.container-fluid>
 
-        <!-- Page Heading -->
-        <div class="d-lg-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 mt-2 text-gray-900">Edit Satuan Barang</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 mt-2">
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.unit-type.index') }}">Satuan Barang</a></li>
-                    <li class="breadcrumb-item">Edit</li>
-                </ol>
-            </nav>
-        </div>
+        <x-content.heading-page :title="'Edit Satuan Barang'" :breadcrumbs="[
+            ['title' => 'Dashboard', 'url' => route('gudang.dashboard')],
+            ['title' => 'Satuan Barang', 'url' => route('gudang.unit-type.index')],
+            ['title' => 'Edit'],
+        ]" />
 
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- Basic Card Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Edit Satuan Barang</h6>
+        <x-content.table-container>
+
+            <x-content.table-header :title="'Edit Satuan Barang'" :icon="'fas fa-solid fa-edit'" />
+
+            <x-content.card-body>
+                <form id="main-form" action="{{ route('gudang.unit-type.update', $unitType->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="form-group">
+                        <label for="name">Satuan Barang</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                            id="name" value="{{ old('name', $unitType->name) }}">
                     </div>
-                    <div class="card-body">
-                        <form id="main-form" action="{{ route('gudang.unit-type.update', $unitType->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
 
-                            <div class="form-group">
-                                <label for="name">Satuan Barang</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" id="name" value="{{ old('name', $unitType->name) }}">
-                                @error('name')
-                                    <div class="text-danger">*{{ $message }}</div>
-                                @enderror
-                            </div>
+                    <button type="submit" id="submit-btn" class="btn btn-success mt-3">Edit</button>
+                    <a href="{{ route('gudang.unit-type.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
+                </form>
+            </x-content.card-body>
 
-                            <button type="submit" id="submit-btn" class="btn btn-success mt-3">Edit</button>
-                            <a href="{{ route('gudang.unit-type.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
-                        </form>
-                    </div>
-                </div>
+        </x-content.table-container>
 
-            </div>
-
-        </div>
-    </div>
+    </x-content.container-fluid>
 @endsection
 
 @push('scripts')

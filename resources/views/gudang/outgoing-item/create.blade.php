@@ -5,69 +5,50 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <x-content.container-fluid>
 
-        <!-- Page Heading -->
-        <div class="d-lg-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 mt-2 text-gray-900">Tambah Barang Keluar</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 mt-2">
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('gudang.outgoing-item.index') }}">Barang Keluar</a></li>
-                    <li class="breadcrumb-item">Tambah</li>
-                </ol>
-            </nav>
-        </div>
+        <x-content.heading-page :title="'Tambah Barang Keluar'" :breadcrumbs="[
+            ['title' => 'Dashboard', 'url' => route('gudang.dashboard')],
+            ['title' => 'Barang Keluar', 'url' => route('gudang.outgoing-item.index')],
+            ['title' => 'Tambah'],
+        ]" />
 
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- Basic Card Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Tambah Barang Keluar</h6>
+        <x-content.table-container>
+
+            <x-content.table-header :title="'Tambah Barang Keluar'" :icon="'fas fa-solid fa-plus'" />
+
+            <x-content.card-body>
+                <form id="main-form" action="{{ route('gudang.outgoing-item.store') }}" method="POST">
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="item_id">Data Barang <span class="text-warning">(Kode Barang - Nama
+                                Barang)</span></label>
+                        <select class="form-control @error('item_id') is-invalid @enderror" name="item_id" id="item_id">
+                            <option value="">-- Pilih Data Barang --</option>
+                            @foreach ($items as $item)
+                                <option value="{{ $item->id }}" {{ old('item_id') === $item->id ? 'selected' : '' }}>
+                                    {{ $item->item_code }} -
+                                    {{ $item->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="card-body">
-                        <form id="main-form" action="{{ route('gudang.outgoing-item.store') }}" method="POST">
-                            @csrf
 
-                            <div class="form-group">
-                                <label for="item_id">Data Barang <span class="text-danger">(Kode Barang - Nama
-                                        Barang)</span></label>
-                                <select class="form-control @error('item_id') is-invalid @enderror" name="item_id"
-                                    id="item_id">
-                                    <option value="">-- Pilih Data Barang --</option>
-                                    @foreach ($items as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ old('item_id') === $item->id ? 'selected' : '' }}>{{ $item->item_code }} -
-                                            {{ $item->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('item_id')
-                                    <div class="text-danger">*{{ message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="quantity">Jumlah Barang Keluar</label>
-                                <input type="number" class="form-control" id="quantity" name="quantity"
-                                    value="{{ old('quantity') }}" placeholder="Masukkan Jumlah Barang Keluar">
-                                @error('quantity')
-                                    <div class="text-danger">*{{ message }}</div>
-                                @enderror
-                            </div>
-
-                            <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Tambah</button>
-                            <a href="{{ route('gudang.outgoing-item.index') }}"
-                                class="btn btn-warning mt-3 ml-2">Kembali</a>
-                        </form>
+                    <div class="form-group">
+                        <label for="quantity">Jumlah Barang Keluar</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity"
+                            value="{{ old('quantity') }}" placeholder="Masukkan Jumlah Barang Keluar">
                     </div>
-                </div>
 
-            </div>
+                    <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Tambah</button>
+                    <a href="{{ route('gudang.outgoing-item.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
+                </form>
+            </x-content.card-body>
 
-        </div>
-    </div>
+        </x-content.table-container>
+
+    </x-content.container-fluid>
 @endsection
 
 @push('scripts')
