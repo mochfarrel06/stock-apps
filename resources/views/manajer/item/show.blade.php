@@ -5,19 +5,13 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <x-content.container-fluid>
 
-        <!-- Page Heading -->
-        <div class="d-lg-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 mt-2 text-gray-900">Lihat Data Barang</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 mt-2">
-                    <li class="breadcrumb-item"><a href="{{ route('manajer.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('manajer.item.index') }}">Data Barang</a></li>
-                    <li class="breadcrumb-item">Lihat</li>
-                </ol>
-            </nav>
-        </div>
+        <x-content.heading-page :title="'Lihat Data Barang'" :breadcrumbs="[
+            ['title' => 'Dashboard', 'url' => route('manajer.dashboard')],
+            ['title' => 'Data Barang', 'url' => route('manajer.item.index')],
+            ['title' => 'Lihat'],
+        ]" />
 
         <div class="row">
             <div class="col-lg-5 mb-4">
@@ -33,11 +27,10 @@
                 </div>
             </div>
             <div class="col-lg-7 mb-4">
-                <!-- Informasi Produk -->
-                <div class="card shadow">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Informasi Data Barang</h6>
-                    </div>
+                <x-content.table-container>
+
+                    <x-content.table-header :title="'Informasi Data Barang'" :icon="'fas fa-solid fa-eye'" />
+
                     <div class="card-body">
                         <form>
                             @csrf
@@ -81,9 +74,8 @@
                             <a href="{{ route('manajer.item.index') }}" class="btn btn-warning mt-3">Kembali</a>
                         </form>
                     </div>
-                </div>
+                </x-content.table-container>
             </div>
         </div>
-
-    </div>
+    </x-content.container-fluid>
 @endsection
