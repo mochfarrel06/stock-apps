@@ -5,51 +5,36 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <x-content.container-fluid>
 
-        <!-- Page Heading -->
-        <div class="d-lg-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 mt-2 text-gray-900">Tambah Satuan Barang</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 mt-2">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.unit-type.index') }}">Satuan Barang</a></li>
-                    <li class="breadcrumb-item">Tambah</li>
-                </ol>
-            </nav>
-        </div>
+        <x-content.heading-page :title="'Tambah Satuan Barang'" :breadcrumbs="[
+            ['title' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['title' => 'Satuan Barang', 'url' => route('admin.unit-type.index')],
+            ['title' => 'Tambah'],
+        ]" />
 
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- Basic Card Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Tambah Satuan Barang</h6>
+        <x-content.table-container>
+
+            <x-content.table-header :title="'Tambah Satuan Barang'" :icon="'fas fa-solid fa-plus'" />
+
+            <x-content.card-body>
+                <form id="main-form" action="{{ route('admin.unit-type.store') }}" method="POST">
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="name">Satuan Barang</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                            id="name" value="{{ old('name') }}" placeholder="Masukkan Satuan Barang">
                     </div>
-                    <div class="card-body">
-                        <form id="main-form" action="{{ route('admin.unit-type.store') }}" method="POST">
-                            @csrf
 
-                            <div class="form-group">
-                                <label for="name">Satuan Barang</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" id="name" value="{{ old('name') }}"
-                                    placeholder="Masukkan Satuan Barang">
-                                @error('name')
-                                    <div class="text-danger">*{{ message }}</div>
-                                @enderror
-                            </div>
+                    <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Tambah</button>
+                    <a href="{{ route('admin.unit-type.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
+                </form>
+            </x-content.card-body>
 
-                            <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Tambah</button>
-                            <a href="{{ route('admin.unit-type.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
-                        </form>
-                    </div>
-                </div>
+        </x-content.table-container>
 
-            </div>
-
-        </div>
-    </div>
+    </x-content.container-fluid>
 @endsection
 
 @push('scripts')
