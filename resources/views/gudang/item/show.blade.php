@@ -14,7 +14,6 @@
         ]" />
 
         <div class="row">
-
             <div class="col-lg-5 mb-4">
                 <div class="card shadow">
                     <div class="card-body text-center">
@@ -32,6 +31,7 @@
                 <x-content.table-container>
 
                     <x-content.table-header :title="'Informasi Data Barang'" :icon="'fas fa-solid fa-eye'" />
+
                     <div class="card-body">
                         <form>
                             @csrf

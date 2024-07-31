@@ -5,82 +5,77 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <x-content.container-fluid>
 
-        <!-- Page Heading -->
-        <div class="d-lg-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 mt-2 text-gray-900">Profile</h1>
-        </div>
+        <x-content.heading-page :title="'Halaman Edit Profil'" />
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Edit Profil</h6>
-                    </div>
-                    <div class="card-body">
-                        <form id="main-form" action="{{ route('gudang.profile.updateProfile') }}" method="POST"
-                            enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
+        <x-content.table-container>
 
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <div class="form-group">
-                                        <label for="avatar" class="form-label">Gambar Produk</label>
-                                        <div class="image-upload-wrapper">
-                                            <input class="form-control" type="file" id="avatar" name="avatar"
-                                                onchange="previewImage(event)">
+            <x-content.table-header :title="'Edit Profil'" :icon="'fas fa-solid fa-user'" />
 
-                                            <!-- Tampilkan gambar yang sudah ada -->
-                                            <div class="preview-image mt-3">
-                                                <img id="preview"
-                                                    src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : '#' }}"
-                                                    alt="Gambar Produk"
-                                                    style="{{ auth()->user()->avatar ? 'display: block;' : 'display: none;' }}">
-                                            </div>
+            <x-content.card-body>
+                <form id="main-form" action="{{ route('gudang.profile.updateProfile') }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-                                            <div class="image-upload-text" id="upload-text"
-                                                style="{{ auth()->user()->avatar ? 'display: none;' : 'display: block;' }}">
-                                                Choose File
-                                            </div>
-                                            <div id="error-message" class="text-danger mt-2" style="display: none;"></div>
-                                        </div>
-                                        <div class="text-info mt-2">*File harus berformat JPG, JPEG, PNG</div>
-                                        <div class="text-info">*File harus berukuran 1000 KB</div>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label for="avatar" class="form-label">Gambar Produk</label>
+                                <div class="image-upload-wrapper">
+                                    <input class="form-control" type="file" id="avatar" name="avatar"
+                                        onchange="previewImage(event)">
+
+                                    <!-- Tampilkan gambar yang sudah ada -->
+                                    <div class="preview-image mt-3">
+                                        <img id="preview"
+                                            src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : '#' }}"
+                                            alt="Gambar Produk"
+                                            style="{{ auth()->user()->avatar ? 'display: block;' : 'display: none;' }}">
                                     </div>
+
+                                    <div class="image-upload-text" id="upload-text"
+                                        style="{{ auth()->user()->avatar ? 'display: none;' : 'display: block;' }}">
+                                        Choose File
+                                    </div>
+                                    <div id="error-message" class="text-danger mt-2" style="display: none;"></div>
                                 </div>
+                                <div class="text-info mt-2">*File harus berformat JPG, JPEG, PNG</div>
+                                <div class="text-info">*File harus berukuran 1000 KB</div>
+                            </div>
+                        </div>
 
-                                <div class="col-lg-7">
-                                    <div class="form-group">
-                                        <label for="name">Nama Lengkap</label>
-                                        <input type="text" id="name" name="name" class="form-control"
-                                            value="{{ auth()->user()->name }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" id="email" name="email" class="form-control"
-                                            value="{{ auth()->user()->email }}">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" id="username" name="username" class="form-control"
-                                            value="{{ auth()->user()->username }}">
-                                    </div>
-                                </div>
+                        <div class="col-lg-7">
+                            <div class="form-group">
+                                <label for="name">Nama Lengkap</label>
+                                <input type="text" id="name" name="name" class="form-control"
+                                    value="{{ auth()->user()->name }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control"
+                                    value="{{ auth()->user()->email }}">
                             </div>
 
-                            <div class="mt-2">
-                                <button type="submit" id="submit-btn" class="btn btn-success">Edit</button>
-                                <a href="{{ route('gudang.profile.index') }}" class="btn btn-warning ml-2">Kembali</a>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username" class="form-control"
+                                    value="{{ auth()->user()->username }}">
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+                    <div class="mt-2">
+                        <button type="submit" id="submit-btn" class="btn btn-success">Edit</button>
+                        <a href="{{ route('gudang.profile.index') }}" class="btn btn-warning ml-2">Kembali</a>
+                    </div>
+                </form>
+            </x-content.card-body>
+
+        </x-content.table-container>
+
+    </x-content.container-fluid>
 @endsection
 
 

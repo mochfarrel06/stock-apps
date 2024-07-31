@@ -40,7 +40,7 @@ class ManajerOutgoingItemReportController extends Controller
         $outgoingItems = $this->getFilteredData($startDate, $endDate);
 
         $pdf = Pdf::loadView('manajer.outgoing-item.outgoing-report.exportPdf', compact('startDate', 'endDate', 'outgoingItems'));
-        return $pdf->download('laporan_data_barang.pdf');
+        return $pdf->download('laporan_barang_keluar.pdf');
     }
 
     public function exportExcel(Request $request)
@@ -50,6 +50,6 @@ class ManajerOutgoingItemReportController extends Controller
 
         $outgoingItems = $this->getFilteredData($startDate, $endDate);
 
-        return Excel::download(new OutgoingExport($outgoingItems), 'laporan.xlsx');
+        return Excel::download(new OutgoingExport($outgoingItems), 'laporan_barang_keluar.xlsx');
     }
 }

@@ -22,10 +22,22 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'photo' => ['nullable', 'image', 'max:3000'],
+            'avatar' => ['nullable', 'image', 'max:1000', 'mimes:png,jpg,jpeg'],
             'name' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:200', 'unique:users,email,' . auth()->user()->id],
             'username' => ['required', 'string']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nama tidak boleh kosong',
+            'email.required' => 'Email tidak boleh kosong',
+            'username.required' => 'Username tidak boleh kosong',
+            'avatar.image' => 'File harus berupa gambar',
+            'avatar.max' => 'Ukuran gambar tidak boleh lebih dari 1000 KB',
+            'avatar.mimes' => 'Format gambar harus berupa PNG, JPG, atau JPEG'
         ];
     }
 }
