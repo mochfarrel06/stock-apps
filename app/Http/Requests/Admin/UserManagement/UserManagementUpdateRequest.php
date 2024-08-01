@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\UserManagement;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserManagementUpdateRequest extends FormRequest
 {
@@ -21,12 +22,24 @@ class UserManagementUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $userId = $this->route('user_management');
         return [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('users', 'username')->ignore($userId)
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->ignore($userId)
+            ],
             'role' => ['required', 'in:Administrator,Gudang,Manajer'],
-            'password' => ['required', 'string', 'min:4', 'confirmed'],
+            'password' => ['nullable', 'string', 'min:4', 'confirmed'],
         ];
     }
 
@@ -39,7 +52,8 @@ class UserManagementUpdateRequest extends FormRequest
             'email.required' => 'Email tidak boleh kosong',
             'email.unique' => 'Email sudah di tambahkan',
             'role.required' => 'Role tidak boleh kosong',
-            'password.required' => 'Password tidak boleh kosong'
+            'password.min' => 'Password harus memiliki setidaknya 4 karakter',
+            'password.confirmed' => 'Password dan konfirmasi password tidak sama'
         ];
     }
 }

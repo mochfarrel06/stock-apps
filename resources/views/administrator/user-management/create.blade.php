@@ -23,22 +23,22 @@
 
                     <div class="form-group">
                         <label for="name">Nama</label>
-                        <input type="text" name="name" class="form-control" placeholder="Masukkan nama pengguna"
-                            value="{{ old('name') }}">
+                        <input type="text" name="name" id="name" class="form-control"
+                            placeholder="Masukkan nama pengguna" value="{{ old('name') }}">
                     </div>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" name="username" class="form-control" placeholder="Masukkan username pengguna"
-                            value="{{ old('username') }}">
+                        <input type="text" name="username" id="username" class="form-control"
+                            placeholder="Masukkan username pengguna" value="{{ old('username') }}">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="Masukkan email pengguna"
-                            value="{{ old('email') }}">
+                        <input type="email" name="email" id="email" class="form-control"
+                            placeholder="Masukkan email pengguna" value="{{ old('email') }}">
                     </div>
                     <div class="form-group">
                         <label for="role">Role</label>
-                        <select name="role" class="form-control">
+                        <select name="role" id="role" class="form-control">
                             <option value="">-- Pilih Role --</option>
                             <option value="Gudang">Gudang</option>
                             <option value="Manajer">Manajer</option>
@@ -46,12 +46,13 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" placeholder="Masukkan password" class="form-control">
+                        <input type="password" id="password" name="password" placeholder="Masukkan password"
+                            class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="password_confirmation">Konfirmasi Password</label>
-                        <input type="password" name="password_confirmation" placeholder="Masukkan konfirmasi password"
-                            class="form-control">
+                        <input type="password" id="password_confirmation" name="password_confirmation"
+                            placeholder="Masukkan konfirmasi password" class="form-control">
                     </div>
 
                     <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Tambah</button>

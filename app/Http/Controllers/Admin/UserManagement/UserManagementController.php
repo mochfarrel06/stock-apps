@@ -85,10 +85,16 @@ class UserManagementController extends Controller
             if ($request->filled('password')) {
                 $user->password = Hash::make($request->password);
             }
-            $user->save();
 
-            session()->flash('success', 'Berhasil menambahkan data pengguna');
-            return response()->json(['success' => true], 200);
+            // Check if any changes were made
+            if ($user->isDirty()) {
+                $user->save();
+                session()->flash('success', 'Berhasil memperbarui data pengguna');
+                return response()->json(['success' => true], 200);
+            } else {
+                session()->flash('info', 'Tidak melakukan perubahan data pengguna');
+                return response()->json(['info' => true], 200);
+            }
         } catch (\Exception $e) {
             // Log error dan tampilkan pesan error
             session()->flash('error', 'Terdapat kesalahan pada proses data barang: ' . $e->getMessage());
@@ -109,7 +115,7 @@ class UserManagementController extends Controller
             $user->delete();
 
             // Memberikan respons bahwa penghapusan berhasil
-            return response(['status' => 'success', 'message' => 'Berhasil menghapus data pada satuan barang']);
+            return response(['status' => 'success', 'message' => 'Berhasil menghapus data pengguna']);
         } catch (\Exception $e) {
             // Menangani exception jika terjadi kesalahan saat menghapus
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
