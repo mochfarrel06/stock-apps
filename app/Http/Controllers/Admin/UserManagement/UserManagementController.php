@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\UserManagement;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UserManagement\UserManagementCreateRequest;
+use App\Http\Requests\Admin\UserManagement\UserManagementUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +16,7 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('role', '!=', 'Administrator')->get();
 
         return view('administrator.user-management.index', compact('users'));
     }
@@ -30,26 +32,24 @@ class UserManagementController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserManagementCreateRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
-            'role' => 'required|in:Administrator,Gudang,Manajer',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        try {
+            $user = new User();
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->role = $request->role;
+            $user->password = Hash::make($request->password);
+            $user->save();
 
-        User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'role' => $request->role,
-            'password' => Hash::make($request->password)
-        ]);
-
-        session()->flash('success', 'Berhasil menambahkan data pengguna');
-        return response()->json(['success' => true], 200);
+            session()->flash('success', 'Berhasil menambahkan data pengguna');
+            return response()->json(['success' => true], 200);
+        } catch (\Exception $e) {
+            // Log error dan tampilkan pesan error
+            session()->flash('error', 'Terdapat kesalahan pada proses data barang: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
     }
 
     /**
@@ -73,29 +73,33 @@ class UserManagementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserManagementUpdateRequest $request, string $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'role' => 'required|in:Administrator,Gudang,Manajer',
-            'password' => 'nullable|string|min:8|confirmed',
-        ]);
+        try {
+            $user = User::findOrFail($id);
 
-        $user = User::findOrFail($id);
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->role = $request->role;
+            if ($request->filled('password')) {
+                $user->password = Hash::make($request->password);
+            }
 
-        $user->name = $request->name;
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->role = $request->role;
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
+            // Check if any changes were made
+            if ($user->isDirty()) {
+                $user->save();
+                session()->flash('success', 'Berhasil memperbarui data pengguna');
+                return response()->json(['success' => true], 200);
+            } else {
+                session()->flash('info', 'Tidak melakukan perubahan data pengguna');
+                return response()->json(['info' => true], 200);
+            }
+        } catch (\Exception $e) {
+            // Log error dan tampilkan pesan error
+            session()->flash('error', 'Terdapat kesalahan pada proses data barang: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 400);
         }
-        $user->save();
-
-        session()->flash('success', 'Berhasil menambahkan data pengguna');
-        return response()->json(['success' => true], 200);
     }
 
     /**
@@ -111,7 +115,7 @@ class UserManagementController extends Controller
             $user->delete();
 
             // Memberikan respons bahwa penghapusan berhasil
-            return response(['status' => 'success', 'message' => 'Berhasil menghapus data pada satuan barang']);
+            return response(['status' => 'success', 'message' => 'Berhasil menghapus data pengguna']);
         } catch (\Exception $e) {
             // Menangani exception jika terjadi kesalahan saat menghapus
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);

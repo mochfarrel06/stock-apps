@@ -44,7 +44,7 @@
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
                 <th>Jenis Barang</th>
-                <th>Stock</th>
+                <th>Stok</th>
                 <th>Satuan</th>
             </tr>
         </thead>

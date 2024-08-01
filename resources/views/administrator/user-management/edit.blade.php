@@ -5,72 +5,64 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <x-content.container-fluid>
 
-        <!-- Page Heading -->
-        <div class="d-lg-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 mt-2 text-gray-900">Edit Pengguna</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 mt-2">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.user-management.index') }}">Pengguna</a></li>
-                    <li class="breadcrumb-item">Edit</li>
-                </ol>
-            </nav>
-        </div>
+        <x-content.heading-page :title="'Edit Data Pengguna'" :breadcrumbs="[
+            ['title' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['title' => 'Pengguna', 'url' => route('admin.user-management.index')],
+            ['title' => 'Edit'],
+        ]" />
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Edit Pengguna</h6>
+        <x-content.table-container>
+
+            <x-content.table-header :title="'Edit Data Pengguna'" :icon="'fas fa-solid fa-edit'" />
+
+            <x-content.card-body>
+                <form id="main-form" action="{{ route('admin.user-management.update', $user->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="form-group">
+                        <label for="name">Nama</label>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}">
                     </div>
-                    <div class="card-body">
-                        <form id="main-form" action="{{ route('admin.user-management.update', $user->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-
-                            <div class="form-group">
-                                <label for="name">Nama</label>
-                                <input type="text" name="name" class="form-control" value="{{ $user->name }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" name="username" class="form-control" value="{{ $user->username }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" value="{{ $user->email }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="role">Role</label>
-                                <select name="role" class="form-control">
-                                    <option value="Administrator" {{ $user->role == 'Administrator' ? 'selected' : '' }}>
-                                        Administrator</option>
-                                    <option value="Gudang" {{ $user->role == 'Gudang' ? 'selected' : '' }}>Gudang</option>
-                                    <option value="Manajer" {{ $user->role == 'Manajer' ? 'selected' : '' }}>Manajer
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password (kosongkan jika tidak ingin mengubah)</label>
-                                <input type="password" name="password" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="password_confirmation">Konfirmasi Password</label>
-                                <input type="password" name="password_confirmation" class="form-control">
-                            </div>
-
-                            <button type="submit" id="submit-btn" class="btn btn-success mt-3">Edit</button>
-                            <a href="{{ route('admin.user-management.index') }}"
-                                class="btn btn-warning mt-3 ml-2">Kembali</a>
-                        </form>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" class="form-control"
+                            value="{{ $user->username }}">
                     </div>
-                </div>
-            </div>
-        </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control"
+                            value="{{ $user->email }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select name="role" id="role" class="form-control">
+                            <option value="Administrator" {{ $user->role == 'Administrator' ? 'selected' : '' }}>
+                                Administrator</option>
+                            <option value="Gudang" {{ $user->role == 'Gudang' ? 'selected' : '' }}>Gudang</option>
+                            <option value="Manajer" {{ $user->role == 'Manajer' ? 'selected' : '' }}>Manajer
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password (kosongkan jika tidak ingin mengubah)</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password_confirmation">Konfirmasi Password</label>
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+                    </div>
 
-    </div>
+                    <button type="submit" id="submit-btn" class="btn btn-success mt-3">Edit</button>
+                    <a href="{{ route('admin.user-management.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
+                </form>
+            </x-content.card-body>
+
+        </x-content.table-container>
+
+    </x-content.container-fluid>
 @endsection
 
 @push('scripts')

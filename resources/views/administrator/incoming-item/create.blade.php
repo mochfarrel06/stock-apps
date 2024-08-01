@@ -5,69 +5,50 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <x-content.container-fluid>
 
-        <!-- Page Heading -->
-        <div class="d-lg-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 mt-2 text-gray-900">Tambah Barang Masuk</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 mt-2">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.incoming-item.index') }}">Barang Masuk</a></li>
-                    <li class="breadcrumb-item">Tambah</li>
-                </ol>
-            </nav>
-        </div>
+        <x-content.heading-page :title="'Tambah Barang Masuk'" :breadcrumbs="[
+            ['title' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['title' => 'Barang Masuk', 'url' => route('admin.incoming-item.index')],
+            ['title' => 'Tambah'],
+        ]" />
 
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- Basic Card Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Tambah Barang Masuk</h6>
+        <x-content.table-container>
+
+            <x-content.table-header :title="'Tambah Barang Masuk'" :icon="'fas fa-solid fa-plus'" />
+
+            <x-content.card-body>
+                <form id="main-form" action="{{ route('admin.incoming-item.store') }}" method="POST">
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="item_id">Data Barang <span class="text-warning">(Kode Barang - Nama
+                                Barang)</span></label>
+                        <select class="form-control @error('item_id') is-invalid @enderror" name="item_id" id="item_id">
+                            <option value="">-- Pilih Data Barang --</option>
+                            @foreach ($items as $item)
+                                <option value="{{ $item->id }}" {{ old('item_id') === $item->id ? 'selected' : '' }}>
+                                    {{ $item->item_code }} -
+                                    {{ $item->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="card-body">
-                        <form id="main-form" action="{{ route('admin.incoming-item.store') }}" method="POST">
-                            @csrf
 
-                            <div class="form-group">
-                                <label for="item_id">Data Barang <span class="text-danger">(Kode Barang - Nama
-                                        Barang)</span></label>
-                                <select class="form-control @error('item_id') is-invalid @enderror" name="item_id"
-                                    id="item_id">
-                                    <option value="">-- Pilih Data Barang --</option>
-                                    @foreach ($items as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ old('item_id') === $item->id ? 'selected' : '' }}>{{ $item->item_code }} -
-                                            {{ $item->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('item_id')
-                                    <div class="text-danger">*{{ message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="quantity">Jumlah Barang Masuk</label>
-                                <input type="number" class="form-control" id="quantity" name="quantity"
-                                    value="{{ old('quantity') }}" placeholder="Masukkan Jumlah Barang Masuk">
-                                @error('quantity')
-                                    <div class="text-danger">*{{ message }}</div>
-                                @enderror
-                            </div>
-
-                            <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Tambah</button>
-                            <a href="{{ route('admin.incoming-item.index') }}"
-                                class="btn btn-warning mt-3 ml-2">Kembali</a>
-                        </form>
+                    <div class="form-group">
+                        <label for="quantity">Jumlah Barang Masuk</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity"
+                            value="{{ old('quantity') }}" placeholder="Masukkan Jumlah Barang Masuk">
                     </div>
-                </div>
 
-            </div>
+                    <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Tambah</button>
+                    <a href="{{ route('admin.incoming-item.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
+                </form>
+            </x-content.card-body>
 
-        </div>
-    </div>
+        </x-content.table-container>
+
+    </x-content.container-fluid>
 @endsection
 
 @push('scripts')
