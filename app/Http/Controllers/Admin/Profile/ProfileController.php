@@ -32,6 +32,14 @@ class ProfileController extends Controller
 
             $imagePath = $this->uploadImage($request, 'avatar');
 
+            if ($imagePath) {
+                // Hapus gambar lama jika ada gambar baru yang diunggah
+                if ($user->avatar && file_exists(public_path($user->avatar))) {
+                    unlink(public_path($user->avatar));
+                }
+                $user->avatar = $imagePath;
+            }
+
             $user->name = $request->name;
             $user->email = $request->email;
             $user->avatar = isset($imagePath) ? $imagePath : $user->avatar;

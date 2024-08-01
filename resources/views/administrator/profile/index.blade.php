@@ -5,12 +5,9 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <x-content.container-fluid>
 
-        <!-- Page Heading -->
-        <div class="d-lg-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 mt-2 text-gray-900">Profile</h1>
-        </div>
+        <x-content.heading-page :title="'Halaman Profil'" />
 
         <div class="row">
             <div class="col-lg-4 mb-4">
@@ -26,12 +23,11 @@
                 </div>
             </div>
             <div class="col-lg-8 mb-4">
-                <!-- Informasi Produk -->
-                <div class="card shadow">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Informasi Profil</h6>
-                    </div>
-                    <div class="card-body">
+                <x-content.table-container>
+
+                    <x-content.table-header :title="'Informasi Profil'" :icon="'fas fa-solid fa-circle-info'" />
+
+                    <x-content.card-body>
                         <form>
                             @csrf
 
@@ -50,15 +46,20 @@
                                 <input type="text" class="form-control" value="{{ auth()->user()->username }}" disabled>
                             </div>
 
+                            <div class="form-group">
+                                <label>Role</label>
+                                <input type="text" class="form-control" value="{{ auth()->user()->role }}" disabled>
+                            </div>
+
                             <a href="{{ route('admin.profile.editProfile') }}" class="btn btn-success mt-3 mr-2">Edit
                                 Profil</a>
                             <a href="{{ route('admin.profile.editPassword') }}" class="btn btn-warning mt-3">Ganti
                                 Password</a>
                         </form>
-                    </div>
-                </div>
+                    </x-content.card-body>
+
+                </x-content.table-container>
             </div>
         </div>
-
-    </div>
+    </x-content.container-fluid>
 @endsection
