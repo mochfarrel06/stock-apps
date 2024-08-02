@@ -22,7 +22,7 @@
                     Profile
                 </a>
                 <div class="dropdown-divider"></div>
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ $routeStore }}">
                     @csrf
                     <a class="dropdown-item" href=""
                         onclick="event.preventDefault();

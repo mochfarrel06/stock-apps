@@ -10,14 +10,16 @@ class Navbar extends Component
 {
     public $routeActive;
     public $routeLink;
+    public $routeStore;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($routeActive = null, $routeLink = null)
+    public function __construct($routeActive = null, $routeLink = null, $routeStore = null)
     {
         $this->routeActive = $routeActive;
         $this->routeLink = $routeLink;
+        $this->routeStore = $routeStore;
     }
 
     /**

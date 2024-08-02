@@ -24,6 +24,10 @@ class AdminAuthController extends Controller
         if ($request->user()->role === 'Administrator') {
             session()->flash('success', 'Berhasil masuk aplikasi');
             return redirect()->intended(RouteServiceProvider::ADMIN);
+        } else if ($request->user()->role === 'Gudang' || $request->user()->role === 'Manajer') {
+            Auth::logout();
+            session()->flash('error', "Login untuk user tidak diizinkan di halaman ini.");
+            return redirect()->back();
         }
     }
 
