@@ -35,16 +35,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route untuk home
 Route::get('/', function () {
     return view('auth.login');
 });
 
+// Route auth admin
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('login', [AdminAuthController::class, 'index'])->name('login');
     Route::post('login', [AdminAuthController::class, 'store'])->name('store');
     Route::post('logout', [AdminAuthController::class, 'destroy'])->name('destroy');
 });
 
+// Route auth user (Gudang dan Manajer)
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'store'])->name('login.store');
 Route::post('logout', [AuthController::class, 'destroy'])->name('logout');

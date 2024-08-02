@@ -18,7 +18,7 @@
             <x-master.content>
 
                 <!-- Topbar -->
-                <x-navbar :routeActive="'manajer.profile.*'" :routeLink="'manajer.profile.index'" />
+                <x-navbar :routeActive="'manajer.profile.*'" :routeLink="'manajer.profile.index'" routeStore="{{ route('logout') }}" />
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
