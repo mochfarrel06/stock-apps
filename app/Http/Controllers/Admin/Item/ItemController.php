@@ -9,7 +9,6 @@ use App\Models\Item;
 use App\Models\ItemType;
 use App\Models\UnitType;
 use App\Traits\FileUploadTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
