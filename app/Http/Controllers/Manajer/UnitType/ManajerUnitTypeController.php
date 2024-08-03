@@ -8,19 +8,21 @@ use Illuminate\Http\Request;
 
 class ManajerUnitTypeController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $unitTypes = UnitType::all();
-
         return view('manajer.unit-type.index', compact('unitTypes'));
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function show(string $id)
     {
-        // Mengambil data satuan barang berdasarkan ID. Jika tidak ditemukan, akan melempar exception.
         $unitType = UnitType::findOrFail($id);
-
-        // Menampilkan view 'gudang.unit-type.show' dengan data $unitType
         return view('manajer.unit-type.show', compact('unitType'));
     }
 }
