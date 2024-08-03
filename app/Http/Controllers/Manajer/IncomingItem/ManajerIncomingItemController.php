@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class ManajerIncomingItemController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $incomingItems = IncomingItem::all();
@@ -15,6 +18,9 @@ class ManajerIncomingItemController extends Controller
         return view('manajer.incoming-item.index', compact('incomingItems'));
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function show(string $id)
     {
         $incomingItem = IncomingItem::findOrFail($id);

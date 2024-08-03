@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\IncomingItem;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\IncomingItem\IncomingItemCreateRequest;
+use App\Http\Requests\IncomingItem\IncomingItemCreateRequest;
 use App\Models\IncomingItem;
 use App\Models\Item;
 use Illuminate\Http\Request;
@@ -56,7 +56,6 @@ class IncomingItemController extends Controller
             session()->flash('success', 'Berhasil menambahkan data barang masuk');
             return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
-            // Log error dan tampilkan pesan error
             session()->flash('error', 'Terdapat kesalahan pada proses data barang masuk: ' . $e->getMessage());
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -98,17 +97,13 @@ class IncomingItemController extends Controller
             $incomingItem = IncomingItem::findOrFail($id);
             $item = $incomingItem->item;
 
-            // Kurangi stok barang sesuai quantity dari barang masuk yang dihapus
             $item->stock -= $incomingItem->quantity;
             $item->save();
 
-            // Hapus data barang masuk
             $incomingItem->delete();
 
-            // Memberikan respons bahwa penghapusan berhasil
             return response(['status' => 'success', 'message' => 'Berhasil menghapus data barang masuk']);
         } catch (\Exception $e) {
-            // Menangani exception jika terjadi kesalahan saat menghapus
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
