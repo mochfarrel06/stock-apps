@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Admin\Item;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Item\ItemCreateRequest;
-use App\Http\Requests\Admin\Item\ItemUpdateRequest;
+use App\Http\Requests\Item\ItemCreateRequest;
+use App\Http\Requests\Item\ItemUpdateRequest;
 use App\Models\Item;
 use App\Models\ItemType;
 use App\Models\UnitType;
 use App\Traits\FileUploadTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
     use FileUploadTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -63,7 +63,6 @@ class ItemController extends Controller
             session()->flash('success', 'Berhasil menambahkan data barang');
             return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
-            // Log error dan tampilkan pesan error
             session()->flash('error', 'Terdapat kesalahan pada proses data barang: ' . $e->getMessage());
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -125,10 +124,10 @@ class ItemController extends Controller
             if ($item->isDirty()) {
                 $item->save();
 
-                session()->flash('success', 'Berhasil melakukan perubahan data pada data barang');
+                session()->flash('success', 'Berhasil melakukan perubahan pada data barang');
                 return response()->json(['success' => true], 200);
             } else {
-                session()->flash('info', 'Tidak melakukan perubahan data pada data barang');
+                session()->flash('info', 'Tidak melakukan perubahan pada data barang');
                 return response()->json(['info' => true], 200);
             }
         } catch (\Exception $e) {

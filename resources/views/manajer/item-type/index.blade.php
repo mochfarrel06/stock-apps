@@ -33,5 +33,6 @@
             </x-content.table-body>
 
         </x-content.table-container>
+
     </x-content.container-fluid>
 @endsection

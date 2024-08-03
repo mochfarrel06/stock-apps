@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Item;
+namespace App\Http\Requests\Item;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,7 +22,6 @@ class ItemUpdateRequest extends FormRequest
     public function rules(): array
     {
         $itemId = $this->route('item');
-
         return [
             'item_type_id' => ['required', 'exists:item_types,id'],
             'unit_type_id' => ['required', 'exists:unit_types,id'],

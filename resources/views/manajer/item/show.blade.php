@@ -14,6 +14,7 @@
         ]" />
 
         <div class="row">
+
             <div class="col-lg-5 mb-4">
                 <!-- Gambar Produk -->
                 <div class="card shadow">
@@ -26,6 +27,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-7 mb-4">
                 <x-content.table-container>
 
@@ -74,8 +76,11 @@
                             <a href="{{ route('manajer.item.index') }}" class="btn btn-warning mt-3">Kembali</a>
                         </form>
                     </div>
+
                 </x-content.table-container>
             </div>
+
         </div>
+
     </x-content.container-fluid>
 @endsection

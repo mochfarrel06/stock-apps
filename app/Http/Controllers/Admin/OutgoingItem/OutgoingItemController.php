@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\OutgoingItem;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\OutgoingItem\OutgoingItemCreateRequest;
+use App\Http\Requests\OutgoingItem\OutgoingItemCreateRequest;
 use App\Models\Item;
 use App\Models\OutgoingItem;
 use Illuminate\Http\Request;
@@ -56,7 +56,6 @@ class OutgoingItemController extends Controller
             session()->flash('success', 'Berhasil menambahkan data barang keluar');
             return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
-            // Log error dan tampilkan pesan error
             session()->flash('error', 'Terdapat kesalahan pada proses data barang keluar: ' . $e->getMessage());
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -98,17 +97,13 @@ class OutgoingItemController extends Controller
             $outgoingItem = OutgoingItem::findOrFail($id);
             $item = $outgoingItem->item;
 
-            // Kurangi stok barang sesuai quantity dari barang masuk yang dihapus
             $item->stock += $outgoingItem->quantity;
             $item->save();
 
-            // Hapus data barang masuk
             $outgoingItem->delete();
 
-            // Memberikan respons bahwa penghapusan berhasil
             return response(['status' => 'success', 'message' => 'Berhasil menghapus barang keluar']);
         } catch (\Exception $e) {
-            // Menangani exception jika terjadi kesalahan saat menghapus
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }

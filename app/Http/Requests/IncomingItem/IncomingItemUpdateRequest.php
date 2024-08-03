@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Gudang\UnitType;
-
-use Illuminate\Validation\Rule;
+namespace App\Http\Requests\IncomingItem;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UnitTypeUpdateRequest extends FormRequest
+class IncomingItemUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,17 +21,18 @@ class UnitTypeUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $unitTypeId = $this->route('unit_type');
         return [
-            'name' => ['required', 'string', 'max:255',  Rule::unique('unit_types', 'name')->ignore($unitTypeId)]
+            'item_id' => ['required', 'numeric'],
+            'quantity' => ['required', 'numeric', 'min:1'],
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Satuan barang tidak boleh kosong',
-            'name.unique' => 'Nama satuan barang sudah di tambahkan'
+            'item_id.required' => 'Data barang tidak boleh kosong',
+            'quantity.required' => 'Jumlah barang masuk tidak boleh kosong',
+            'quantity.min' => 'Jumlah barang masuk tidak boleh kurang dari 1'
         ];
     }
 }

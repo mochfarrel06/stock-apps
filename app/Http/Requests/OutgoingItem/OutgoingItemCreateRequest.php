@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\OutgoingItem;
+namespace App\Http\Requests\OutgoingItem;
 
 use App\Models\Item;
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,7 +24,7 @@ class OutgoingItemCreateRequest extends FormRequest
     {
         return [
             'item_id' => ['required', 'numeric'],
-            'quantity' => ['required', 'numeric', 'min:0', function ($attribute, $value, $fail) {
+            'quantity' => ['required', 'numeric', 'min:1', function ($attribute, $value, $fail) {
                 $item = Item::find($this->item_id);
                 if ($item && $value > $item->stock) {
                     $fail('Jumlah barang keluar tidak boleh lebih dari stok yang ada.');
@@ -40,7 +40,7 @@ class OutgoingItemCreateRequest extends FormRequest
             'item_id.exists' => 'Data barang tidak ditemukan',
             'quantity.required' => 'Jumlah barang keluar tidak boleh kosong',
             'quantity.numeric' => 'Jumlah barang keluar harus berupa angka',
-            'quantity.min' => 'Jumlah barang keluar tidak boleh kurang dari 0',
+            'quantity.min' => 'Jumlah barang keluar tidak boleh kurang dari 1',
         ];
     }
 }

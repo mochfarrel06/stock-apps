@@ -4,17 +4,21 @@ namespace App\Http\Controllers\Manajer\Item;
 
 use App\Http\Controllers\Controller;
 use App\Models\Item;
-use Illuminate\Http\Request;
 
 class ManajerItemController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $items = Item::all();
-
         return view('manajer.item.index', compact('items'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function show(string $id)
     {
         $item = Item::findOrFail($id);

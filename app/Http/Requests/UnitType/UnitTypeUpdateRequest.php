@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\ItemType;
+namespace App\Http\Requests\UnitType;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class ItemTypeCreateRequest extends FormRequest
+class UnitTypeUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,16 +22,17 @@ class ItemTypeCreateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $unitTypeId = $this->route('unit_type');
         return [
-            'name' => ['required', 'string', 'unique:item_types,name', 'max:255']
+            'name' => ['required', 'string', 'max:255',  Rule::unique('unit_types', 'name')->ignore($unitTypeId)]
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Jenis barang tidak boleh kosong',
-            'name.unique' => 'Nama jenis barang sudah di tambahkan'
+            'name.required' => 'Satuan barang tidak boleh kosong',
+            'name.unique' => 'Nama satuan barang sudah di tambahkan'
         ];
     }
 }

@@ -49,6 +49,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'role:Admin
     Route::get('outgoing-report/export-pdf', [OutgoingItemReportController::class, 'exportPdf'])->name('outgoing-report.exportPdf');
     Route::get('outgoing-report/export-excel', [OutgoingItemReportController::class, 'exportExcel'])->name('outgoing-report.exportExcel');
 
-    // ROute pengguna
+    // Route pengguna
     Route::resource('user-management', UserManagementController::class);
 });

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Gudang\Item;
+namespace App\Http\Requests\Item;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ItemUpdateRequest extends FormRequest
+class ItemCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,16 +21,15 @@ class ItemUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $itemId = $this->route('item');
         return [
             'item_type_id' => ['required', 'exists:item_types,id'],
             'unit_type_id' => ['required', 'exists:unit_types,id'],
             'name' => ['required', 'string', 'max:255'],
-            'item_code' => ['required', 'string', 'max:255', 'unique:items,item_code,' . $itemId],
+            'item_code' => ['required', 'string', 'max:255', 'unique:items,item_code'],
             'stock' => ['nullable', 'numeric', 'min:0'],
             'reorder_level' => ['required', 'numeric', 'min:0'],
             'price' => ['required', 'numeric'],
-            'photo' => ['nullable', 'image', 'max:1000', 'mimes:png,jpg,jpeg']
+            'photo' => ['required', 'image', 'max:1000', 'mimes:png,jpg,jpeg']
         ];
     }
 
@@ -44,6 +43,7 @@ class ItemUpdateRequest extends FormRequest
             'item_code.unique' => 'Kode barang sudah di tambahkan',
             'reorder_level.required' => 'Stock minimum tidak boleh kosong',
             'price.required' => 'Harga Barang tidak boleh kosong',
+            'photo.required' => 'Gambar Barang tidak boleh kosong',
             'photo.image' => 'File harus berupa gambar',
             'photo.max' => 'Ukuran gambar tidak boleh lebih dari 1000 KB',
             'photo.mimes' => 'Format gambar harus berupa PNG, JPG, atau JPEG'

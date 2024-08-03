@@ -100,8 +100,10 @@
                         </div>
                     </div>
 
-                    <button type="submit" id="submit-btn" class="btn btn-success mt-3">Edit</button>
-                    <a href="{{ route('gudang.item.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
+                    <div class="mt-3">
+                        <button type="submit" id="submit-btn" class="btn btn-success">Edit</button>
+                        <a href="{{ route('gudang.item.index') }}" class="btn btn-warning ml-2">Kembali</a>
+                    </div>
                 </form>
             </x-content.card-body>
 
@@ -132,13 +134,13 @@
                             // Flash message sukses
                             sessionStorage.setItem('success', 'Data barang berhasil disubmit.');
                             window.location.href =
-                            "{{ route('gudang.item.index') }}"; // Redirect to index page
+                                "{{ route('gudang.item.index') }}"; // Redirect to index page
                         } else if (response.info) {
                             // Flash message info
                             sessionStorage.setItem('info',
                                 'Tidak melakukan perubahan pada data barang.');
                             window.location.href =
-                            "{{ route('gudang.item.index') }}"; // Redirect to index page
+                                "{{ route('gudang.item.index') }}"; // Redirect to index page
                         } else {
                             // Flash message error
                             $('#flash-messages').html('<div class="alert alert-danger">' +
@@ -157,7 +159,7 @@
 
                             if (field === 'photo') {
                                 $('#upload-text')
-                            .hide(); // Hide "Choose File" text if there is an error
+                                    .hide(); // Hide "Choose File" text if there is an error
                             }
                         }
 

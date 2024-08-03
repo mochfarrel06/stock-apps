@@ -47,6 +47,7 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label for="unit_type_id">Satuan Barang</label>
                                 <select class="form-control @error('item_code') is-invalid @enderror" name="unit_type_id"
@@ -64,6 +65,7 @@
                                     name="reorder_level" id="reorder_level" value="{{ old('reorder_level') }}"
                                     placeholder="Masukkan Stock Barang Minimum">
                             </div>
+
                             <div class="form-group">
                                 <label for="price">Harga Barang</label>
                                 <input type="number" class="form-control @error('item_code') is-invalid @enderror"
@@ -89,8 +91,11 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Tambah</button>
-                    <a href="{{ route('gudang.item.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
+
+                    <div class="mt-3">
+                        <button type="submit" id="submit-btn" class="btn btn-primary">Tambah</button>
+                        <a href="{{ route('gudang.item.index') }}" class="btn btn-warning ml-2">Kembali</a>
+                    </div>
                 </form>
             </x-content.card-body>
 

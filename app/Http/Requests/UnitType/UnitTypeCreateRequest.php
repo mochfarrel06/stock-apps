@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Gudang\IncomingItem;
+namespace App\Http\Requests\UnitType;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class IncomingItemCreateRequest extends FormRequest
+class UnitTypeCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +22,15 @@ class IncomingItemCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'item_id' => ['required', 'numeric'],
-            'quantity' => ['required', 'numeric', 'min:1'],
+            'name' => ['required', 'string', 'unique:unit_types,name', 'max:255']
         ];
     }
 
     public function messages()
     {
         return [
-            'item_id.required' => 'Data barang tidak boleh kosong',
-            'quantity.required' => 'Jumlah barang masuk tidak boleh kosong',
-            'quantity.min' => 'Jumlah barang masuk tidak boleh kurang dari 1'
+            'name.required' => 'Satuan barang tidak boleh kosong',
+            'name.unique' => 'Nama satuan barang sudah di tambahkan'
         ];
     }
 }
