@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Gudang\Item;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Gudang\Item\ItemUpdateRequest;
+use App\Http\Requests\Item\ItemUpdateRequest;
 use App\Http\Requests\Item\ItemCreateRequest;
 use App\Models\Item;
 use App\Models\ItemType;

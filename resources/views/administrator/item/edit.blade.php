@@ -100,8 +100,10 @@
                         </div>
                     </div>
 
-                    <button type="submit" id="submit-btn" class="btn btn-success mt-3">Edit</button>
-                    <a href="{{ route('admin.item.index') }}" class="btn btn-warning mt-3 ml-2">Kembali</a>
+                    <div class="mt-3">
+                        <button type="submit" id="submit-btn" class="btn btn-success">Edit</button>
+                        <a href="{{ route('admin.item.index') }}" class="btn btn-warning ml-2">Kembali</a>
+                    </div>
                 </form>
             </x-content.card-body>
 
