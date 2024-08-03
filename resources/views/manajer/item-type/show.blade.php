@@ -25,9 +25,11 @@
                         <label>Jenis Barang</label>
                         <input type="text" class="form-control" value="{{ $itemType->name }}" disabled>
                     </div>
+
                     <a href="{{ route('manajer.item-type.index') }}" class="btn btn-warning mt-3">Kembali</a>
                 </form>
             </div>
+
         </x-content.table-container>
 
     </x-content.container-fluid>
