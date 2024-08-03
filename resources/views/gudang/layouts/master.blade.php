@@ -15,7 +15,7 @@
             <!-- Main Content -->
             <x-master.content>
                 <!-- Topbar -->
-                <x-navbar :routeActive="'gudang.profile.*'" :routeLink="'gudang.profile.index'" />
+                <x-navbar :routeActive="'gudang.profile.*'" :routeLink="'gudang.profile.index'" routeStore="{{ route('logout') }}" />
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

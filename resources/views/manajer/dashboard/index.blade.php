@@ -7,7 +7,7 @@
 @section('content')
     <x-content.container-fluid>
 
-        <x-content.heading-page :title="'Halaman Dashboard'" />
+        <x-content.heading-page :title="'Halaman Dashboard Manajer'" />
 
         <x-content.card-row>
             @foreach ($cards as $card)

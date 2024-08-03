@@ -3,11 +3,6 @@
 namespace App\Http\Controllers\Manajer\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\IncomingItem;
-use App\Models\Item;
-use App\Models\ItemType;
-use App\Models\OutgoingItem;
-use App\Models\UnitType;
 use App\Repositories\Contracts\DashboardRepositoryInterface;
 
 class ManajerDashboardController extends Controller

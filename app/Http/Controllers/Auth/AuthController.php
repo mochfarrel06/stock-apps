@@ -21,15 +21,16 @@ class AuthController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        if ($request->user()->role === 'Admin') {
-            session()->flash('success', 'Berhasil masuk aplikasi');
-            return redirect()->intended(RouteServiceProvider::ADMIN);
-        } else if ($request->user()->role === 'Gudang') {
+        if ($request->user()->role === 'Gudang') {
             session()->flash('success', 'Berhasil masuk aplikasi');
             return redirect()->intended(RouteServiceProvider::GUDANG);
         } else if ($request->user()->role === 'Manajer') {
             session()->flash('success', 'Berhasil masuk aplikasi');
             return redirect()->intended(RouteServiceProvider::MANAJER);
+        } else if ($request->user()->role === 'Administrator') {
+            Auth::logout();
+            session()->flash('error', "Login untuk admin tidak diizinkan di halaman ini.");
+            return redirect()->back();
         }
     }
 

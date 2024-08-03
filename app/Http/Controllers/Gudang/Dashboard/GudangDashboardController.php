@@ -9,7 +9,6 @@ class GudangDashboardController extends Controller
 {
     protected $repository;
 
-    // Dependency Injection
     public function __construct(DashboardRepositoryInterface $repository)
     {
         $this->repository = $repository;
@@ -27,7 +26,6 @@ class GudangDashboardController extends Controller
             ['title' => 'Satuan Barang', 'bg_color' => 'warning', 'value' => $data['unitType'], 'icon' => 'fas fa-folder']
         ];
 
-        // Menampilkan pada view
         return view('gudang.dashboard.index', ['cards' => $cards, 'data' => $data['lowStockItems']]);
     }
 }

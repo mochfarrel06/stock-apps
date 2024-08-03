@@ -1,25 +1,22 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Auth;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class TableHeader extends Component
+class AuthLayout extends Component
 {
     public $title;
-    public $icon;
-    public $addRoute;
-
+    public $route;
     /**
      * Create a new component instance.
      */
-    public function __construct($title, $icon, $addRoute = null)
+    public function __construct($title, $route)
     {
         $this->title = $title;
-        $this->icon = $icon;
-        $this->addRoute = $addRoute;
+        $this->route = $route;
     }
 
     /**
@@ -27,6 +24,6 @@ class TableHeader extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.table-header');
+        return view('components.auth.auth-layout');
     }
 }

@@ -36,7 +36,7 @@ class AuthRequest extends FormRequest
     {
         return [
             'username.required' => "Username tidak boleh kosong",
-            'password' => "password tidak boleh kosong",
+            'password' => "Password tidak boleh kosong",
         ];
     }
 
@@ -55,7 +55,8 @@ class AuthRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'username' => [trans('auth.failed')],
+                'username' => "Username atau password salah",
+                'password' => "Username atau password salah",
             ]);
         }
 
