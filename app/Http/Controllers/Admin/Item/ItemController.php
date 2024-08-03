@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Item;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Item\ItemCreateRequest;
+use App\Http\Requests\Item\ItemCreateRequest;
 use App\Http\Requests\Admin\Item\ItemUpdateRequest;
 use App\Models\Item;
 use App\Models\ItemType;
@@ -62,7 +62,6 @@ class ItemController extends Controller
             session()->flash('success', 'Berhasil menambahkan data barang');
             return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
-            // Log error dan tampilkan pesan error
             session()->flash('error', 'Terdapat kesalahan pada proses data barang: ' . $e->getMessage());
             return response()->json(['error' => $e->getMessage()], 400);
         }
