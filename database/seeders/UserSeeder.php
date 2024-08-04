@@ -23,23 +23,8 @@ class UserSeeder extends Seeder
     {
         User::insert([
             [
-                'name' => 'Moch Farrel',
-                'username' => 'farrel26',
-                'email' => 'gudang@gmail.com',
-                'role' => 'Gudang',
-                'password' => static::$password ??= Hash::make('password'),
-            ],
-
-            [
-                'name' => 'Dysna Lola',
-                'username' => 'dysna06',
-                'email' => 'gudang2@gmail.com',
-                'role' => 'Manajer',
-                'password' => static::$password ??= Hash::make('password'),
-            ],
-
-            [
                 'name' => 'admin',
+                'avatar' => '/uploads/profile/admin-avatar.png',
                 'username' => 'admin',
                 'email' => 'admin@gmail.com',
                 'role' => 'Administrator',

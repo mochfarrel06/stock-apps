@@ -24,6 +24,7 @@ class UserManagementCreateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'avatar' => ['required', 'image', 'max:1000', 'mimes:png,jpg,jpeg'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'role' => ['required', 'in:Administrator,Gudang,Manajer'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
@@ -39,7 +40,12 @@ class UserManagementCreateRequest extends FormRequest
             'email.required' => 'Email tidak boleh kosong',
             'email.unique' => 'Email sudah di tambahkan',
             'role.required' => 'Role tidak boleh kosong',
-            'password.required' => 'Password tidak boleh kosong'
+            'password.required' => 'Password tidak boleh kosong',
+            'password.confirmed' => 'Password dan konfirmasi password tidak sama',
+            'avatar.required' => 'Gambar pengguna tidak boleh kosong',
+            'avatar.image' => 'File harus berupa gambar',
+            'avatar.max' => 'Ukuran gambar tidak boleh lebih dari 1000 KB',
+            'avatar.mimes' => 'Format gambar harus berupa PNG, JPG, atau JPEG'
         ];
     }
 }

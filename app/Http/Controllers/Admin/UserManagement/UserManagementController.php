@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserManagement\UserManagementCreateRequest;
 use App\Http\Requests\Admin\UserManagement\UserManagementUpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Traits\ProfileUploadTrait;
 use Illuminate\Support\Facades\Hash;
 
 class UserManagementController extends Controller
 {
+    use ProfileUploadTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -35,8 +37,11 @@ class UserManagementController extends Controller
     public function store(UserManagementCreateRequest $request)
     {
         try {
+            $imagePath = $this->uploadImage($request, 'avatar');
+
             $user = new User();
             $user->name = $request->name;
+            $user->avatar =  isset($imagePath) ? $imagePath : 'avatar';
             $user->username = $request->username;
             $user->email = $request->email;
             $user->role = $request->role;

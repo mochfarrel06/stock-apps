@@ -21,38 +21,59 @@
                 <form id="main-form" action="{{ route('admin.user-management.store') }}" method="POST">
                     @csrf
 
-                    <div class="form-group">
-                        <label for="name">Nama</label>
-                        <input type="text" name="name" id="name" class="form-control"
-                            placeholder="Masukkan nama pengguna" value="{{ old('name') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username" class="form-control"
-                            placeholder="Masukkan username pengguna" value="{{ old('username') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control"
-                            placeholder="Masukkan email pengguna" value="{{ old('email') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Role</label>
-                        <select name="role" id="role" class="form-control">
-                            <option value="">-- Pilih Role --</option>
-                            <option value="Gudang">Gudang</option>
-                            <option value="Manajer">Manajer</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Masukkan password"
-                            class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="password_confirmation">Konfirmasi Password</label>
-                        <input type="password" id="password_confirmation" name="password_confirmation"
-                            placeholder="Masukkan konfirmasi password" class="form-control">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input type="text" name="name" id="name" class="form-control"
+                                    placeholder="Masukkan nama pengguna" value="{{ old('name') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" id="username" class="form-control"
+                                    placeholder="Masukkan username pengguna" value="{{ old('username') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" class="form-control"
+                                    placeholder="Masukkan email pengguna" value="{{ old('email') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Role</label>
+                                <select name="role" id="role" class="form-control">
+                                    <option value="">-- Pilih Role --</option>
+                                    <option value="Gudang">Gudang</option>
+                                    <option value="Manajer">Manajer</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" placeholder="Masukkan password"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password_confirmation">Konfirmasi Password</label>
+                                <input type="password" id="password_confirmation" name="password_confirmation"
+                                    placeholder="Masukkan konfirmasi password" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label for="avatar" class="form-label">Gambar Produk</label>
+                                <div class="image-upload-wrapper">
+                                    <input class="form-control @error('item_code') is-invalid @enderror" type="file"
+                                        id="avatar" name="avatar" onchange="previewImage(event)">
+                                    <div class="image-upload-text" id="upload-text">Choose File</div>
+                                    <div class="preview-image mt-3">
+                                        <img id="preview" src="#" alt="Gambar Produk" style="display: none;">
+                                    </div>
+                                    <div id="error-message" class="text-danger mt-2" style="display: none;"></div>
+                                </div>
+                                <div class="text-info mt-2">*File harus berformat JPG, JPEG, PNG</div>
+                                <div class="text-info">*File harus berukuran 1000 KB</div>
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Tambah</button>
@@ -74,6 +95,30 @@
 
                 const form = $(this)[0];
                 const formData = new FormData(form); // Create FormData object with form data
+
+                // Validasi ukuran dan format file
+                const file = $('#avatar')[0].files[0];
+                const errorMessage = $('#error-message');
+                let valid = true;
+
+                if (file) {
+                    if (file.size > 1024 * 1024) {
+                        errorMessage.text('*File harus berukuran maksimal 1000 KB');
+                        errorMessage.show();
+                        valid = false;
+                    }
+
+                    const validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                    if (!validImageTypes.includes(file.type)) {
+                        errorMessage.text('*File harus berformat JPG, JPEG, PNG');
+                        errorMessage.show();
+                        valid = false;
+                    }
+                }
+
+                if (!valid) {
+                    return;
+                }
 
                 submitBtn.prop('disabled', true).text('Loading...');
 
@@ -102,7 +147,7 @@
                             input.next('.invalid-feedback').remove();
                             input.after('<div class="invalid-feedback">' + error + '</div>');
 
-                            if (field === 'photo') {
+                            if (field === 'avatar') {
                                 $('#upload-text')
                                     .hide(); // Hide "Choose File" text if there is an error
                             }
@@ -124,5 +169,18 @@
                 $(this).next('.invalid-feedback').text('');
             });
         });
+
+        function previewImage(event) {
+            let reader = new FileReader();
+            let output = document.getElementById('preview');
+            let uploadText = document.getElementById('upload-text');
+
+            reader.onload = function() {
+                output.src = reader.result;
+                output.style.display = 'block';
+                uploadText.style.display = 'none'; // Sembunyikan teks "Choose File"
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
     </script>
 @endpush
