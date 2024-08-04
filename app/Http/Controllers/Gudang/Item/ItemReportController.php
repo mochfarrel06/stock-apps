@@ -47,15 +47,13 @@ class ItemReportController extends Controller
     {
         $filter = $request->input('filter', ''); // Default to empty string if filter is not present
 
-        $query = Item::query();
-
         if ($filter === 'minimum') {
             $items = Item::whereColumn('stock', '<=', 'reorder_level')->get();
-        } elseif ($filter === '') {
+        } elseif ($filter === 'all') {
             $items = Item::all();
+        } else {
+            $items = Item::all(); // Default case if no filter is selected
         }
-
-        $items = $query->get();
 
         return Excel::download(new ItemExport($items), 'laporan_data_barang.xlsx');
     }
