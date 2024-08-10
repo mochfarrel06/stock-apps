@@ -36,7 +36,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Pengguna
+        Manajemen Pengguna
     </div>
 
     <li class="nav-item {{ request()->routeIs('admin.user-management.*') ? 'active' : '' }}">
