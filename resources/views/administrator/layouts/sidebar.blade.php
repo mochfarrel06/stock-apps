@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <x-sidebar.layout>
     <!-- Sidebar title -->
-    <x-sidebar.title :name="'codeFa'" :icon="'fas fa-solid fa-book'" :addRoute="'admin.dashboard'" />
+    <x-sidebar.title :name="'FarrCode'" :icon="'fas fa-solid fa-book'" :addRoute="'admin.dashboard'" />
     <!-- End sidebar title -->
 
     <!-- Nav item dashboard -->

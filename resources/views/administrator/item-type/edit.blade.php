@@ -30,10 +30,8 @@
                         @enderror
                     </div>
 
-                    <div class="mt-3">
-                        <button type="submit" id="submit-btn" class="btn btn-success">Edit</button>
-                        <a href="{{ route('admin.item-type.index') }}" class="btn btn-warning ml-2">Kembali</a>
-                    </div>
+                    <button type="submit" id="submit-btn" class="btn btn-success mt-3">Edit</button>
+                    <a href="{{ route('admin.item-type.index') }}" class="btn btn-warning ml-2 mt-3">Kembali</a>
                 </form>
             </x-content.card-body>
 

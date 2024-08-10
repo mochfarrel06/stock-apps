@@ -26,10 +26,8 @@
                             id="name" value="{{ old('name') }}" placeholder="Masukkan Jenis Barang">
                     </div>
 
-                    <div class="mt-3">
-                        <button type="submit" id="submit-btn" class="btn btn-primary">Tambah</button>
-                        <a href="{{ route('admin.item-type.index') }}" class="btn btn-warning ml-2">Kembali</a>
-                    </div>
+                    <button type="submit" id="submit-btn" class="btn btn-primary mt-3">Tambah</button>
+                    <a href="{{ route('admin.item-type.index') }}" class="btn btn-warning ml-2 mt-3">Kembali</a>
                 </form>
             </x-content.card-body>
 

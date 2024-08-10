@@ -116,6 +116,13 @@ class UserManagementController extends Controller
             // Mengambil satuan barang berdasarkan ID. Jika tidak ditemukan, melempar exception.
             $user = User::findOrFail($id);
 
+            if ($user->avatar) {
+                $avatarPath = public_path($user->avatar);
+                if (file_exists($avatarPath)) {
+                    unlink($avatarPath);
+                }
+            }
+
             // Menghapus data satuan barang dari database
             $user->delete();
 
