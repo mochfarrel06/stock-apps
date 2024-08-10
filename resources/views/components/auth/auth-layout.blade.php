@@ -50,7 +50,7 @@
     <!-- End Form -->
 
     <!-- Footer -->
-    <x-auth.footer description="© {{ date('Y') }} CodeFa. All rights reserved." />
+    <x-auth.footer description="© {{ date('Y') }} FarrCode. All rights reserved." />
     <!-- End Footer -->
 
 </x-auth.container>
