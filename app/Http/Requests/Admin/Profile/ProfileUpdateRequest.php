@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Admin\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
 {
@@ -21,11 +23,23 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $userId = Auth::id(); // Mengambil ID user yang sedang login
         return [
             'avatar' => ['nullable', 'image', 'max:1000', 'mimes:png,jpg,jpeg'],
             'name' => ['required', 'max:50'],
-            'email' => ['required', 'email', 'max:200', 'unique:users,email,' . auth()->user()->id],
-            'username' => ['required', 'string']
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->ignore($userId)
+            ],
+            'username' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('users', 'username')->ignore($userId)
+            ],
         ];
     }
 
@@ -33,8 +47,10 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name.required' => 'Nama tidak boleh kosong',
-            'email.required' => 'Email tidak boleh kosong',
             'username.required' => 'Username tidak boleh kosong',
+            'username.unique' => 'Username sudah di tambahkan',
+            'email.required' => 'Email tidak boleh kosong',
+            'email.unique' => 'Email sudah di tambahkan',
             'avatar.image' => 'File harus berupa gambar',
             'avatar.max' => 'Ukuran gambar tidak boleh lebih dari 1000 KB',
             'avatar.mimes' => 'Format gambar harus berupa PNG, JPG, atau JPEG'

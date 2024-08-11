@@ -18,7 +18,7 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        $users = User::where('role', '!=', 'Administrator')->get();
+        $users = User::all();
 
         return view('administrator.user-management.index', compact('users'));
     }
