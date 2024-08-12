@@ -35,7 +35,7 @@
 
 <body>
     <div style="text-align: center; margin-bottom: 3em">
-        <h2>Laporan Barang Keluar - PT. codeFa Technology</h2>
+        <h2>Laporan Barang Keluar - FarrCode</h2>
         <h4>Periode: {{ \Carbon\Carbon::parse($startDate)->locale('id')->isoFormat('D MMMM YYYY') }} -
             {{ \Carbon\Carbon::parse($endDate)->locale('id')->isoFormat('D MMMM YYYY') }}</h4>
     </div>

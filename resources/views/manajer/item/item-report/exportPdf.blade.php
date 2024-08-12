@@ -35,7 +35,7 @@
 
 <body>
     <div style="text-align: center; margin-bottom: 3em">
-        <h2>{{ $titlePdf }} PT. codeFa Technology</h2>
+        <h2>{{ $titlePdf }} FarrCode</h2>
     </div>
     <table>
         <thead>

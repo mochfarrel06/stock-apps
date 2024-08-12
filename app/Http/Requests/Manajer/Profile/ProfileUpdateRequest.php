@@ -25,7 +25,7 @@ class ProfileUpdateRequest extends FormRequest
             'avatar' => ['nullable', 'image', 'max:1000', 'mimes:png,jpg,jpeg'],
             'name' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:200', 'unique:users,email,' . auth()->user()->id],
-            'username' => ['required', 'string']
+            'username' => ['required', 'string', 'unique:users,username,' . auth()->user()->id]
         ];
     }
 
@@ -34,7 +34,9 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name.required' => 'Nama tidak boleh kosong',
             'email.required' => 'Email tidak boleh kosong',
+            'email.unique' => 'Email sudah di tambahkan',
             'username.required' => 'Username tidak boleh kosong',
+            'username.unique' => 'Username sudah di tambahkan',
             'avatar.image' => 'File harus berupa gambar',
             'avatar.max' => 'Ukuran gambar tidak boleh lebih dari 1000 KB',
             'avatar.mimes' => 'Format gambar harus berupa PNG, JPG, atau JPEG'

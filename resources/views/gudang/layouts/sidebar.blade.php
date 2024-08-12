@@ -1,6 +1,6 @@
 <x-sidebar.layout>
     <!-- Start sidebar title -->
-    <x-sidebar.title :name="'codeFa'" :icon="'fas fa-solid fa-book'" :addRoute="'gudang.dashboard'" />
+    <x-sidebar.title :name="'FarrCode'" :icon="'fas fa-solid fa-book'" :addRoute="'gudang.dashboard'" />
     <!-- End sidebar title -->
 
     <!-- Nav item dashboard -->
