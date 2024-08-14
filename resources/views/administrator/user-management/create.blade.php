@@ -61,13 +61,13 @@
 
                         <div class="col-lg-5">
                             <div class="form-group">
-                                <label for="avatar" class="form-label">Gambar Produk</label>
+                                <label for="avatar" class="form-label">Gambar Pengguna</label>
                                 <div class="image-upload-wrapper">
                                     <input class="form-control @error('item_code') is-invalid @enderror" type="file"
                                         id="avatar" name="avatar" onchange="previewImage(event)">
                                     <div class="image-upload-text" id="upload-text">Choose File</div>
                                     <div class="preview-image mt-3">
-                                        <img id="preview" src="#" alt="Gambar Produk" style="display: none;">
+                                        <img id="preview" src="#" alt="Gambar Pengguna" style="display: none;">
                                     </div>
                                     <div id="error-message" class="text-danger mt-2" style="display: none;"></div>
                                 </div>

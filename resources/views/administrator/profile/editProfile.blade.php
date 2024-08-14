@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-lg-5">
                             <div class="form-group">
-                                <label for="avatar" class="form-label">Gambar Produk</label>
+                                <label for="avatar" class="form-label">Gambar Penggguna</label>
                                 <div class="image-upload-wrapper">
                                     <input class="form-control" type="file" id="avatar" name="avatar"
                                         onchange="previewImage(event)">
@@ -31,7 +31,7 @@
                                     <div class="preview-image mt-3">
                                         <img id="preview"
                                             src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : '#' }}"
-                                            alt="Gambar Produk"
+                                            alt="Gambar Penggguna"
                                             style="{{ auth()->user()->avatar ? 'display: block;' : 'display: none;' }}">
                                     </div>
 
