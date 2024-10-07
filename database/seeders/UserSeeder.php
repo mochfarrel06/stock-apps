@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
                 'name' => 'admin',
                 'avatar' => '/uploads/profile/admin-avatar.png',
                 'username' => 'admin',
-                'email' => 'admin@gmail.com',
+                'email' => 'admin1@gmail.com',
                 'role' => 'Administrator',
                 'password' => static::$password ??= Hash::make('password'),
             ],
